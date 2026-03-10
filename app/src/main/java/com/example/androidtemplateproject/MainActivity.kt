@@ -47,15 +47,6 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Button(
-                            modifier = Modifier.size(height = 60.dp, width = 240.dp),
-                            onClick = { call(context, textFieldState.value) }
-                        ) {
-                            Text("Позвонить другу")
-                        }
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
                         TextField(
                             value = textFieldState.value,
                             onValueChange = { textFieldState.value = it },
@@ -71,26 +62,52 @@ class MainActivity : ComponentActivity() {
                             Text("Открыть вторую Activity")
                         }
 
+                        Spacer(modifier = Modifier.height(16.dp))
 
+                        Button(
+                            modifier = Modifier.size(height = 60.dp, width = 240.dp),
+                            onClick = { call(context, textFieldState.value) }
+                        ) {
+                            Text("Позвонить другу")
+                        }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Button(
+                            modifier = Modifier.size(height = 60.dp, width = 240.dp),
+                            onClick = { shareText(context, textFieldState.value) }
+                        ) {
+                            Text("Поделиться текстом")
+                        }
                     }
                 }
             }
         }
     }
 
-    fun routeToTextReviewActivity(context: Context, text: String) {
+    // MARK: - Private
+
+    private fun routeToTextReviewActivity(context: Context, text: String) {
         val intent = Intent(context, MessageReviewActivity::class.java).apply {
             putExtra("text", text)
         }
 
         context.startActivity(intent)
     }
-    
-    fun call(context: Context, phone: String) {
-        // TODO: - Здесь валидацию на номер можно
 
-        var intent = Intent(Intent.ACTION_DIAL).apply {
+    private fun call(context: Context, phone: String) {
+        // TODO: - Здесь валидацию на номер можно
+        val intent = Intent(Intent.ACTION_DIAL).apply {
             data = Uri.parse("tel:$phone")
+        }
+
+        context.startActivity(intent)
+    }
+
+    private fun shareText(context: Context, text: String) {
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, text)
         }
 
         context.startActivity(intent)
