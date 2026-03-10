@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.androidtemplateproject.MessageReviewActivity.ui.theme.AndroidTemplateProjectTheme
 
-class MessageReviewActivity : ComponentActivity() {
+final class MessageReviewActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,7 +31,7 @@ class MessageReviewActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = enteredText ?: "Нечего отображать")
+                        Text(text = enteredText ?: "Валидация не отработала и отображать нечего")
                     }
                 }
             }
