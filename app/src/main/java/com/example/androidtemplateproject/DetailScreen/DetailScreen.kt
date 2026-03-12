@@ -73,5 +73,6 @@ private fun CategoryText(text: String) {
 
 @Composable
 private fun TextSpacer() {
-    Spacer(modifier = Modifier.height(8.dp))
+    val spacerHeight = 8
+    Spacer(modifier = Modifier.height(spacerHeight.dp))
 }

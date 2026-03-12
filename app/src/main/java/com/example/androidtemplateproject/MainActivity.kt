@@ -37,8 +37,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.app.NotificationCompat
 import com.example.androidtemplateproject.Models.AppicationData
 import com.example.androidtemplateproject.Repositories.Repository
 import com.example.androidtemplateproject.ui.theme.AndroidTemplateProjectTheme
@@ -156,7 +158,6 @@ final class MainActivity : ComponentActivity() {
                 .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
                 .background(Color.White)
         ) {
-
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -175,7 +176,6 @@ final class MainActivity : ComponentActivity() {
                         )
                     }
                 }
-
             }
         }
     }
@@ -212,31 +212,29 @@ final class MainActivity : ComponentActivity() {
                     .padding(start = textColumnStartPadding.dp)
                     .align(Alignment.CenterVertically)
             ) {
-                Text(
-                    text = data.title,
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
 
-                Spacer(modifier = Modifier.height(labelsSpacerHeight.dp))
+                RowText(data.title, style = MaterialTheme.typography.titleMedium)
+                TextSpacer(labelsSpacerHeight)
 
-                Text(
-                    text = data.subtitle,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
+                RowText(data.subtitle, style = MaterialTheme.typography.bodyMedium)
+                TextSpacer(labelsSpacerHeight)
 
-                Spacer(modifier = Modifier.height(labelsSpacerHeight.dp))
-
-                Text(
-                    text = data.category,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
+                RowText(data.category, style = MaterialTheme.typography.bodySmall)
             }
         }
+    }
+
+    @Composable
+    private fun RowText(text: String, style: TextStyle) {
+        Text(
+            text = text,
+            style = style,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+
+    @Composable
+    private fun TextSpacer(height: Int) {
+        Spacer(modifier = Modifier.height(height.dp))
     }
 }
