@@ -1,6 +1,7 @@
 package com.example.androidtemplateproject
 
 import android.os.Bundle
+import android.util.Size
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,31 +16,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.MailOutline
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.spacedBy
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -47,17 +34,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHost
 import com.example.androidtemplateproject.Models.AppicationData
-import com.example.androidtemplateproject.Repository.Repository
+import com.example.androidtemplateproject.Repositories.Repository
 import com.example.androidtemplateproject.ui.theme.AndroidTemplateProjectTheme
 
-class MainActivity : ComponentActivity() {
+final class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val mainBackgroundColor = Color(64, 111, 236)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
@@ -68,17 +57,18 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         navController = navController,
                         startDestination = "MainActivity",
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding()
                     ) {
                         composable("MainActivity") {
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .padding()
+                                    .background(mainBackgroundColor)
                             ) {
                                 HeaderView()
 
-                                ApplicationListView { applicationId ->
+                                ApplicationsListView { applicationId ->
                                     navController.navigate("DetailScreen/$applicationId")
                                 }
                             }
@@ -94,82 +84,116 @@ class MainActivity : ComponentActivity() {
                                 DetailScreen(data = it)
                             }
                         }
-
                     }
-
                 }
             }
         }
     }
 
     @Composable
-    private fun HeaderView() {
+    private fun HeaderView(modifier: Modifier? = null) {
+        val rowHeight = 70
+        val defaultPadding = 16
+        val safeAreaSpacerHeight = 30
+        val iconSize = Size(50, 50)
+
+        Spacer(modifier = Modifier.height(safeAreaSpacerHeight.dp))
+
         Row(
-            modifier = Modifier
+            modifier = modifier ?: Modifier
                 .fillMaxWidth()
-                .height(100.dp)
-                .background(Color.Cyan),
+                .height(rowHeight.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .size(50.dp, 50.dp),
-                painter = painterResource(
-                    R.drawable.ic_launcher_foreground
-                ),
-                contentDescription = null
+            HeaderIcon(Modifier
+                .padding(start = defaultPadding.dp)
+                .size(iconSize.width.dp, iconSize.height.dp)
             )
 
-            Text(
-                text = "RuStore", // TODO - Шрифт
-//                                color = Color.White,
-                style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 16.dp)
+            HeaderTitle("RuStore", modifier = Modifier
+                .weight(1f)
+                .padding(start = defaultPadding.dp)
             )
 
-            Icon(
-                modifier = Modifier
-                    .padding(end = 16.dp)
-                    .size(50.dp, 50.dp),
-                painter = painterResource(
-                    R.drawable.ic_launcher_foreground
-                ),
-                contentDescription = null
+            HeaderIcon(Modifier
+                .padding(end = defaultPadding.dp)
+                .size(iconSize.width.dp, iconSize.height.dp)
             )
         }
     }
 
     @Composable
-    private fun ApplicationListView(onApplicationClick: (String) -> Unit) {
+    private fun HeaderTitle(text: String, modifier: Modifier) {
+        Text(
+            text = text,
+            color = Color.White,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            modifier = modifier
+        )
+    }
+
+    @Composable
+    private fun HeaderIcon(modifier: Modifier) {
+        Icon(
+            modifier = modifier,
+            painter = painterResource(
+                R.drawable.ic_launcher_foreground
+            ),
+            contentDescription = null,
+            tint = Color.White
+        )
+    }
+
+    @Composable
+    private fun ApplicationsListView(modifier: Modifier? = null, onApplicationClick: (String) -> Unit) {
+        val cornerRadius = 20
+
         Column(
-            modifier = Modifier
+            modifier = modifier ?: Modifier
                 .fillMaxSize()
                 .padding()
+                .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
+                .background(Color.White)
         ) {
 
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
+                    .background(
+                        color = Color.White,
+                        shape = RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp)
+                    )
             ) {
-                item {
-                    Repository.getApplications().forEach {
-                        ApplicationCard(data = it, onApplicationClick = onApplicationClick)
+                itemsIndexed(Repository.getApplications()) { index, application ->
+                    ApplicationCard(data = application, onApplicationClick = onApplicationClick)
+
+                    if (index < Repository.getApplications().size - 1) {
+                        HorizontalDivider(
+                            color = Color.LightGray,
+                            thickness = 0.5.dp
+                        )
                     }
                 }
+
             }
         }
     }
 
     @Composable
     private fun ApplicationCard(data: AppicationData, onApplicationClick: (String) -> Unit) {
+        val appCardImageSize = Size(80, 80)
+        val labelsSpacerHeight = 2
+        val textColumnStartPadding = 6
+        val cornerRadius = 20
+
         Row(
             modifier = Modifier
                 .padding(horizontal = 6.dp)
-                .height(80.dp)
+                .height(100.dp)
                 .fillMaxWidth()
+                .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
+                .background(Color.White)
                 .clickable {
                     onApplicationClick(data.id)
                 },
@@ -177,18 +201,16 @@ class MainActivity : ComponentActivity() {
         ) {
             Icon(
                 modifier = Modifier
-                    .size(80.dp, 80.dp),
+                    .size(appCardImageSize.width.dp, appCardImageSize.height.dp),
                 imageVector = data.icon,
                 tint = MaterialTheme.colorScheme.primary,
                 contentDescription = null
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
-
             Column(
                 modifier = Modifier
-                    .padding(start = 6.dp)
-                    .fillMaxSize()
+                    .padding(start = textColumnStartPadding.dp)
+                    .align(Alignment.CenterVertically)
             ) {
                 Text(
                     text = data.title,
@@ -197,7 +219,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxWidth()
                 )
 
-                Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(labelsSpacerHeight.dp))
 
                 Text(
                     text = data.subtitle,
@@ -206,7 +228,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxWidth()
                 )
 
-                Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(labelsSpacerHeight.dp))
 
                 Text(
                     text = data.category,

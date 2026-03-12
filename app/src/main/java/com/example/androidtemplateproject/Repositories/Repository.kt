@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.Repository
+package com.example.androidtemplateproject.Repositories
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -16,7 +16,6 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.androidtemplateproject.Models.AppicationData
 
 internal object Repository {
