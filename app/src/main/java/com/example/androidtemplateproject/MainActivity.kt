@@ -223,18 +223,19 @@ final class MainActivity : ComponentActivity() {
             }
         }
     }
+}
 
-    @Composable
-    private fun RowText(text: String, style: TextStyle) {
-        Text(
-            text = text,
-            style = style,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
+// TODO: - Вынести в отдельный файл/фабрику/директорию
+@Composable
+internal fun RowText(text: String, style: TextStyle) {
+    Text(
+        text = text,
+        style = style,
+        modifier = Modifier.fillMaxWidth()
+    )
+}
 
-    @Composable
-    private fun TextSpacer(height: Int) {
-        Spacer(modifier = Modifier.height(height.dp))
-    }
+@Composable
+internal fun TextSpacer(height: Int) {
+    Spacer(modifier = Modifier.height(height.dp))
 }

@@ -20,6 +20,8 @@ import com.example.androidtemplateproject.Models.AppicationData
 internal fun DetailScreen(data: AppicationData) {
     val safeAreaTopPadding = 60
     val defaultPadding = 16
+    val spacerHeight = 8
+    val category = "Категория:"
 
     Column(
         modifier = Modifier
@@ -37,42 +39,21 @@ internal fun DetailScreen(data: AppicationData) {
             modifier = Modifier.padding(bottom = defaultPadding.dp)
         )
 
-        TitleText(text = data.title)
-        TextSpacer()
+        RowText(
+            text = data.title,
+            style = MaterialTheme.typography.headlineMedium
+        )
+        TextSpacer(height = spacerHeight)
 
-        SubtitleText(text = data.subtitle)
-        TextSpacer()
+        RowText(
+            text = data.subtitle,
+            style = MaterialTheme.typography.bodyLarge
+        )
+        TextSpacer(height = spacerHeight)
 
-        CategoryText(text = data.category)
+        RowText(
+            text = "${category} ${data.category}",
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
-}
-
-@Composable
-private fun TitleText(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.headlineMedium
-    )
-}
-
-@Composable
-private fun SubtitleText(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.bodyLarge
-    )
-}
-
-@Composable
-private fun CategoryText(text: String) {
-    Text(
-        text = "Категория: ${text}",
-        style = MaterialTheme.typography.bodyMedium
-    )
-}
-
-@Composable
-private fun TextSpacer() {
-    val spacerHeight = 8
-    Spacer(modifier = Modifier.height(spacerHeight.dp))
 }
