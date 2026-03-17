@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.Repositories
+package com.example.androidtemplateproject.repositories
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -16,7 +16,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ThumbUp
-import com.example.androidtemplateproject.Models.AppicationData
+import com.example.androidtemplateproject.models.AppicationData
 
 internal object Repository {
     fun getApplicationById(id: String): AppicationData? {
