@@ -14,7 +14,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.screens.mainActivity.repositories.AppRepository
 
 @Composable
 internal fun ApplicationsListView(modifier: Modifier? = null, applications: List<ApplicationData>, onApplicationClick: (String) -> Unit) {
