@@ -1,7 +1,7 @@
-package com.example.androidtemplateproject.models
+package com.example.androidtemplateproject.dto
 import androidx.compose.ui.graphics.vector.ImageVector
 
-data class AppicationData(
+data class ApplicationData(
     val id: String,
     val icon: ImageVector,
     val title: String,

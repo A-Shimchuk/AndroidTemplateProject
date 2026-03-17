@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.presentation.uiComponents.header
+package com.example.androidtemplateproject.screens.mainActivity.uiComponents.header
 
 import android.util.Size
 import androidx.compose.foundation.layout.Row
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HeaderView(modifier: Modifier? = null) {
+internal fun HeaderView(modifier: Modifier? = null) {
     val rowHeight = 70
     val defaultPadding = 16
     val safeAreaSpacerHeight = 30
@@ -27,19 +27,22 @@ fun HeaderView(modifier: Modifier? = null) {
             .height(rowHeight.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        HeaderIcon(Modifier
-            .padding(start = defaultPadding.dp)
-            .size(iconSize.width.dp, iconSize.height.dp)
+        HeaderIcon(
+            Modifier
+                .padding(start = defaultPadding.dp)
+                .size(iconSize.width.dp, iconSize.height.dp)
         )
 
-        HeaderTitle("RuStore", modifier = Modifier
-            .weight(1f)
-            .padding(start = defaultPadding.dp)
+        HeaderTitle(
+            "RuStore", modifier = Modifier
+                .weight(1f)
+                .padding(start = defaultPadding.dp)
         )
 
-        HeaderIcon(Modifier
-            .padding(end = defaultPadding.dp)
-            .size(iconSize.width.dp, iconSize.height.dp)
+        HeaderIcon(
+            Modifier
+                .padding(end = defaultPadding.dp)
+                .size(iconSize.width.dp, iconSize.height.dp)
         )
     }
 }

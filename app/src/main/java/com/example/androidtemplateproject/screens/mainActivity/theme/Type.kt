@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.presentation.detailScreen.ui.theme
+package com.example.androidtemplateproject.screens.mainActivity.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

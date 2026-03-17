@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.presentation.uiComponents.applicationList
+package com.example.androidtemplateproject.screens.mainActivity.uiComponents.applicationList
 
 import android.util.Size
 import androidx.compose.foundation.background
@@ -18,10 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.models.AppicationData
+import com.example.androidtemplateproject.baseUIComponents.RowText
+import com.example.androidtemplateproject.baseUIComponents.TextSpacer
+import com.example.androidtemplateproject.dto.ApplicationData
 
 @Composable
-fun ApplicationCard(data: AppicationData, onApplicationClick: (String) -> Unit) {
+internal fun ApplicationCard(data: ApplicationData, onApplicationClick: (String) -> Unit) {
     val appCardImageSize = Size(80, 80)
     val labelsSpacerHeight = 2
     val textColumnStartPadding = 6

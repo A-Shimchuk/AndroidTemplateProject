@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.presentation.uiComponents.applicationList
+package com.example.androidtemplateproject.screens.mainActivity.uiComponents.applicationList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -13,10 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.repositories.Repository
+import com.example.androidtemplateproject.dto.ApplicationData
+import com.example.androidtemplateproject.screens.mainActivity.repositories.AppRepository
 
 @Composable
-fun ApplicationsListView(modifier: Modifier? = null, onApplicationClick: (String) -> Unit) {
+internal fun ApplicationsListView(modifier: Modifier? = null, applications: List<ApplicationData>, onApplicationClick: (String) -> Unit) {
     val cornerRadius = 20
 
     Column(
@@ -34,10 +35,13 @@ fun ApplicationsListView(modifier: Modifier? = null, onApplicationClick: (String
                     shape = RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp)
                 )
         ) {
-            itemsIndexed(Repository.getApplications()) { index, application ->
-                ApplicationCard(data = application, onApplicationClick = onApplicationClick)
+            itemsIndexed(applications) { index, application ->
+                ApplicationCard(
+                    data = application,
+                    onApplicationClick = onApplicationClick
+                )
 
-                if (index < Repository.getApplications().size - 1) {
+                if (index < applications.size - 1) {
                     HorizontalDivider(
                         color = Color.LightGray,
                         thickness = 0.5.dp

@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.repositories
+package com.example.androidtemplateproject.screens.mainActivity.repositories
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -16,113 +16,113 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ThumbUp
-import com.example.androidtemplateproject.models.AppicationData
+import com.example.androidtemplateproject.dto.ApplicationData
 
-internal object Repository {
-    fun getApplicationById(id: String): AppicationData? {
+internal class AppRepository {
+    fun getApplicationById(id: String): ApplicationData? {
         return getApplications().find { it.id == id }
     }
-    fun getApplications(): List<AppicationData> {
+    fun getApplications(): List<ApplicationData> {
         return listOf(
-            AppicationData(
+            ApplicationData(
                 id = "phone",
                 icon = Icons.Default.MailOutline,
                 title = "Телефон",
                 subtitle = "Звонки и контакты",
                 category = "Social"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "mail",
                 icon = Icons.Default.ThumbUp,
                 title = "Почта",
                 subtitle = "Электронная почта",
                 category = "Social"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "messages",
                 icon = Icons.Default.Notifications,
                 title = "Сообщения",
                 subtitle = "SMS и мессенджеры",
                 category = "Social"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "video",
                 icon = Icons.Default.Settings,
                 title = "Видео",
                 subtitle = "Видеоплеер",
                 category = "Media"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "gallery",
                 icon = Icons.Default.DateRange,
                 title = "Галерея",
                 subtitle = "Фотографии и видео",
                 category = "Media"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "music",
                 icon = Icons.Default.AccountBox,
                 title = "Музыка",
                 subtitle = "Музыкальный плеер",
                 category = "Media"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "maps",
                 icon = Icons.Default.AccountCircle,
                 title = "Карты",
                 subtitle = "Навигация и карты",
                 category = "Navigation"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "places",
                 icon = Icons.Default.Place,
                 title = "Места",
                 subtitle = "Избранные места",
                 category = "Navigation"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "cloud",
                 icon = Icons.Default.AddCircle,
                 title = "Облако",
                 subtitle = "Облачное хранилище",
                 category = "Utilities"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "calculator",
                 icon = Icons.Default.Lock,
                 title = "Калькулятор",
                 subtitle = "Вычисления",
                 category = "Utilities"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "calendar",
                 icon = Icons.Default.Build,
                 title = "Календарь",
                 subtitle = "Расписание событий",
                 category = "Productivity"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "notes",
                 icon = Icons.Default.Call,
                 title = "Заметки",
                 subtitle = "Записи и заметки",
                 category = "Productivity"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "settings",
                 icon = Icons.Default.Check,
                 title = "Настройки",
                 subtitle = "Системные настройки",
                 category = "System"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "security",
                 icon = Icons.Default.CheckCircle,
                 title = "Безопасность",
                 subtitle = "Конфиденциальность",
                 category = "System"
             ),
-            AppicationData(
+            ApplicationData(
                 id = "about",
                 icon = Icons.Default.Delete,
                 title = "О приложении",

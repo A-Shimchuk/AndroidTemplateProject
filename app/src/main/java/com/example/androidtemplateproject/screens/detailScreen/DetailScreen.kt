@@ -8,12 +8,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.models.AppicationData
-import com.example.androidtemplateproject.presentation.uiComponents.applicationList.RowText
-import com.example.androidtemplateproject.presentation.uiComponents.applicationList.TextSpacer
+import com.example.androidtemplateproject.dto.ApplicationData
+import com.example.androidtemplateproject.baseUIComponents.RowText
+import com.example.androidtemplateproject.baseUIComponents.TextSpacer
 
 @Composable
-internal fun DetailScreen(data: AppicationData) {
+internal fun DetailScreen(data: ApplicationData) {
     val safeAreaTopPadding = 60
     val defaultPadding = 16
     val spacerHeight = 8
