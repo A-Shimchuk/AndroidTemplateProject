@@ -16,6 +16,7 @@ import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
 import com.example.androidtemplateproject.screens.mainActivity.repositories.AppRepository
 import com.example.androidtemplateproject.screens.mainActivity.theme.AndroidTemplateProjectTheme
+
 // FIXME: - TO BE DONE
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
