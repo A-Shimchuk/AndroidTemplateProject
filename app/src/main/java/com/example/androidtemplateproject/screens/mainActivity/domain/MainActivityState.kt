@@ -1,4 +1,5 @@
-package com.example.androidtemplateproject.screens.mainActivity
+package com.example.androidtemplateproject.screens.mainActivity.domain
+
 import com.example.androidtemplateproject.dto.ApplicationData
 
 data class MainActivityState(

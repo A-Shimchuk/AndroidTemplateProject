@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity
+package com.example.androidtemplateproject.screens.mainActivity.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
+import com.example.androidtemplateproject.screens.mainActivity.domain.MainActivityViewModel
 import com.example.androidtemplateproject.screens.mainActivity.repositories.AppRepository
 import com.example.androidtemplateproject.screens.mainActivity.theme.AndroidTemplateProjectTheme
 

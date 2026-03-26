@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.uiComponents.applicationList
+package com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList
 
 import android.util.Size
 import androidx.compose.foundation.background
