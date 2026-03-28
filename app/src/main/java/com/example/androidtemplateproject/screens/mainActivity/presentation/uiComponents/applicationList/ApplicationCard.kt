@@ -23,7 +23,9 @@ import com.example.androidtemplateproject.baseUIComponents.TextSpacer
 import com.example.androidtemplateproject.dto.ApplicationData
 
 @Composable
-internal fun ApplicationCard(data: ApplicationData, onApplicationClick: (String) -> Unit) {
+internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Unit, onCardClick: (String) -> Unit) {
+    val rowHorizontalPadding = 6
+    val rowHeight = 100
     val appCardImageSize = Size(80, 80)
     val labelsSpacerHeight = 2
     val textColumnStartPadding = 6
@@ -31,19 +33,22 @@ internal fun ApplicationCard(data: ApplicationData, onApplicationClick: (String)
 
     Row(
         modifier = Modifier
-            .padding(horizontal = 6.dp)
-            .height(100.dp)
+            .padding(horizontal = rowHorizontalPadding.dp)
+            .height(rowHeight.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
             .background(Color.White)
             .clickable {
-                onApplicationClick(data.id)
+                onCardClick(data.id)
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             modifier = Modifier
-                .size(appCardImageSize.width.dp, appCardImageSize.height.dp),
+                .size(appCardImageSize.width.dp, appCardImageSize.height.dp)
+                .clickable {
+                    onIconClick(data.id)
+                },
             imageVector = data.icon,
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null

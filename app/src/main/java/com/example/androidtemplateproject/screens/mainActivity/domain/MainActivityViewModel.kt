@@ -1,33 +1,47 @@
-package com.example.androidtemplateproject.screens.mainActivity.presentation
+package com.example.androidtemplateproject.screens.mainActivity.domain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.screens.detailScreen.presentation.DetailScreenViewModel
+import com.example.androidtemplateproject.screens.detailScreen.domain.DetailScreenViewModel
+import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityState
 import com.example.androidtemplateproject.screens.repositories.AppRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 
 class MainActivityViewModel : ViewModel() {
     private companion object LocalConstants{
-        val snackbarText = "Вы велиполепны"
+        val snackbarText = "Произошел показ снекбара"
+        val delayValue: Long = 800
     }
 
     private val appRepository = AppRepository()
     private val _state = MutableStateFlow<MainActivityState>(MainActivityState.Loading)
     val state: StateFlow<MainActivityState> = _state.asStateFlow()
 
+    private val _snackbarEvent = Channel<String>()
+    val snackbarEvent = _snackbarEvent.receiveAsFlow()
+
     init {
         getApplciations()
+    }
+
+    fun onIconClick(applicationId: String) {
+        viewModelScope.launch {
+            _snackbarEvent.send(LocalConstants.snackbarText)
+        }
     }
 
     private fun getApplciations() {
         viewModelScope.launch {
             _state.value = MainActivityState.Loading
-            delay(timeMillis = DetailScreenViewModel.LocalConstants.delayValue)
+            delay(timeMillis = LocalConstants.delayValue)
 
             var applications: List<ApplicationData> = appRepository.getApplications()
             applications?.let {

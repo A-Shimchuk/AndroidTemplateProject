@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,8 +20,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityState
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityViewModel
+import com.example.androidtemplateproject.screens.mainActivity.domain.MainActivityViewModel
 import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList.ApplicationsListView
 import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header.HeaderView
 import com.example.androidtemplateproject.screens.mainActivity.theme.MainColor
@@ -30,13 +32,30 @@ fun MainActivityView(navController: NavController) {
     val viewModel = viewModel<MainActivityViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    // Управление Snackbar
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    // Подписываемся на события snackbar из модельки
+    LaunchedEffect(Unit) {
+        viewModel.snackbarEvent.collect { message ->
+            snackbarHostState.showSnackbar(message)
+        }
+    }
+
     when (val currentState = state) {
         is MainActivityState.Content -> {
-            showApplicationsList(navController, currentState.applicationsData)
+            showApplicationsList(
+                navController,
+                currentState.applicationsData,
+                viewModel,
+                snackbarHostState
+            )
         }
+
         MainActivityState.Error -> {
             showError()
         }
+
         MainActivityState.Loading -> {
             showLoader()
         }
@@ -44,18 +63,32 @@ fun MainActivityView(navController: NavController) {
 }
 
 @Composable
-private fun showApplicationsList(navController: NavController, applications: List<ApplicationData>) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding()
-            .background(MainColor)
-    ) {
-        HeaderView()
+private fun showApplicationsList(
+    navController: NavController,
+    applications: List<ApplicationData>,
+    viewModel: MainActivityViewModel,
+    snackbarHostState: SnackbarHostState
+) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MainColor)
+        ) {
+            HeaderView()
 
-        ApplicationsListView(applications = applications) { applicationId ->
-            navController.navigate("DetailScreen/$applicationId")
+            ApplicationsListView(
+                applications = applications,
+                onIconClick = { applicationId ->
+                    viewModel.onIconClick(applicationId)
+                },
+                onCardClick = { applicationId ->
+                    navController.navigate("DetailScreen/$applicationId")
+                }
+            )
         }
+
+        SnackbarHost(hostState = snackbarHostState)
     }
 }
 
