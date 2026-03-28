@@ -2,9 +2,7 @@ package com.example.androidtemplateproject.screens.mainActivity.domain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.screens.detailScreen.domain.DetailScreenViewModel
 import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityState
 import com.example.androidtemplateproject.screens.repositories.AppRepository
 import kotlinx.coroutines.delay
@@ -32,19 +30,19 @@ class MainActivityViewModel : ViewModel() {
         getApplciations()
     }
 
-    fun onIconClick(applicationId: String) {
+    fun onIconClick() {
         viewModelScope.launch {
-            _snackbarEvent.send(LocalConstants.snackbarText)
+            _snackbarEvent.send(snackbarText)
         }
     }
 
     private fun getApplciations() {
         viewModelScope.launch {
             _state.value = MainActivityState.Loading
-            delay(timeMillis = LocalConstants.delayValue)
+            delay(timeMillis = delayValue)
 
-            var applications: List<ApplicationData> = appRepository.getApplications()
-            applications?.let {
+            val applications: List<ApplicationData> = appRepository.getApplications()
+            applications.let {
                 _state.value = MainActivityState.Content(applications)
             } ?: run {
                 _state.value = MainActivityState.Error

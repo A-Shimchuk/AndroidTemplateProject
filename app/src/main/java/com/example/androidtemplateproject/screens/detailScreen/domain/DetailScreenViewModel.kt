@@ -31,7 +31,7 @@ class DetailScreenViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
             _state.value = DetailScreenState.Loading
             delay(timeMillis = delayValue)
 
-            var application: ApplicationData? = appRepository.getApplicationById(id)
+            val application: ApplicationData? = appRepository.getApplicationById(id)
             application?.let {
                 _state.value = DetailScreenState.Content(application)
             } ?: run {

@@ -43,7 +43,7 @@ internal fun DetailScreen() {
 }
 
 @Composable
-private fun appDetailsContent(appDetails: ApplicationData) {
+private fun AppDetailsContent(appDetails: ApplicationData) {
     val safeAreaTopPadding = 60
     val defaultPadding = 16
     val spacerHeight = 8
@@ -85,7 +85,7 @@ private fun appDetailsContent(appDetails: ApplicationData) {
 }
 
 @Composable
-private fun showLoader() {
+private fun ShowLoader() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -97,7 +97,7 @@ private fun showLoader() {
 }
 
 @Composable
-private fun showError() {
+private fun ShowError() {
     Box(
         modifier = Modifier
             .fillMaxSize()

@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -63,7 +62,7 @@ fun MainActivityView(navController: NavController) {
 }
 
 @Composable
-private fun showApplicationsList(
+private fun ShowApplicationsList(
     navController: NavController,
     applications: List<ApplicationData>,
     viewModel: MainActivityViewModel,
@@ -93,7 +92,7 @@ private fun showApplicationsList(
 }
 
 @Composable
-private fun showLoader() {
+private fun ShowLoader() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -105,7 +104,7 @@ private fun showLoader() {
 }
 
 @Composable
-private fun showError() {
+private fun ShowError() {
     Box(
         modifier = Modifier
             .fillMaxSize()
