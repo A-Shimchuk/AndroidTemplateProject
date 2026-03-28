@@ -30,7 +30,7 @@ class MainActivityViewModel : ViewModel() {
         getApplciations()
     }
 
-    fun onIconClick() {
+    fun onIconClick(appId: String) {
         viewModelScope.launch {
             _snackbarEvent.send(snackbarText)
         }

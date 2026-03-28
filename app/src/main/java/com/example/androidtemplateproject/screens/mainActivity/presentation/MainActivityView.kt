@@ -43,7 +43,7 @@ fun MainActivityView(navController: NavController) {
 
     when (val currentState = state) {
         is MainActivityState.Content -> {
-            showApplicationsList(
+            ShowApplicationsList(
                 navController,
                 currentState.applicationsData,
                 viewModel,
@@ -52,11 +52,11 @@ fun MainActivityView(navController: NavController) {
         }
 
         MainActivityState.Error -> {
-            showError()
+            ShowError()
         }
 
         MainActivityState.Loading -> {
-            showLoader()
+            ShowLoader()
         }
     }
 }

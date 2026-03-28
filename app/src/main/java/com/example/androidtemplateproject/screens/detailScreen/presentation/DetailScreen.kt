@@ -31,13 +31,13 @@ internal fun DetailScreen() {
 
     when (val currentState = state) {
         is DetailScreenState.Content -> {
-            appDetailsContent(currentState.applicationData)
+            AppDetailsContent(currentState.applicationData)
         }
         DetailScreenState.Error -> {
-            showError()
+            ShowError()
         }
         DetailScreenState.Loading -> {
-            showLoader()
+            ShowLoader()
         }
     }
 }
