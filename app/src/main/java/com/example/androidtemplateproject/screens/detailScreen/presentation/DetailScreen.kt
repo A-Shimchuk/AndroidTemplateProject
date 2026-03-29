@@ -21,7 +21,7 @@ import com.example.androidtemplateproject.dto.ApplicationData
 import com.example.androidtemplateproject.baseUIComponents.RowText
 import com.example.androidtemplateproject.baseUIComponents.TextSpacer
 import com.example.androidtemplateproject.screens.detailScreen.presentation.DetailScreenState
-import com.example.androidtemplateproject.screens.detailScreen.domain.DetailScreenViewModel
+import com.example.androidtemplateproject.screens.detailScreen.presentation.DetailScreenViewModel
 import com.example.androidtemplateproject.screens.mainActivity.theme.MainColor
 
 @Composable

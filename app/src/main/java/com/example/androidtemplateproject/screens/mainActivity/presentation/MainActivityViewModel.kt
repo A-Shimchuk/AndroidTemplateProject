@@ -1,17 +1,16 @@
-package com.example.androidtemplateproject.screens.mainActivity.domain
+package com.example.androidtemplateproject.screens.mainActivity.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityState
 import com.example.androidtemplateproject.screens.repositories.AppRepository
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 
 class MainActivityViewModel : ViewModel() {
     private companion object LocalConstants{
