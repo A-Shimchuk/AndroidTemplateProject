@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
 import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList.ApplicationsListView
 import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header.HeaderView
@@ -25,7 +24,9 @@ import com.example.androidtemplateproject.screens.mainActivity.presentation.them
 
 
 @Composable
-fun MainActivityView(navController: NavController) {
+fun MainActivityScreen(
+    onAppClicked: (String) -> Unit
+) {
     // Благодаря viewModel - модель не пересоздается при пересоздании composable-функции
     val viewModel = viewModel<MainActivityViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -43,10 +44,10 @@ fun MainActivityView(navController: NavController) {
     when (val currentState = state) {
         is MainActivityState.Content -> {
             ShowApplicationsList(
-                navController,
-                currentState.applicationsData,
-                viewModel,
-                snackbarHostState
+                onAppClicked = onAppClicked,
+                applications = currentState.applicationsData,
+                viewModel = viewModel,
+                snackbarHostState = snackbarHostState
             )
         }
 
@@ -62,7 +63,7 @@ fun MainActivityView(navController: NavController) {
 
 @Composable
 private fun ShowApplicationsList(
-    navController: NavController,
+    onAppClicked: (String) -> Unit,
     applications: List<ApplicationData>,
     viewModel: MainActivityViewModel,
     snackbarHostState: SnackbarHostState
@@ -80,9 +81,7 @@ private fun ShowApplicationsList(
                 onIconClick = { applicationId ->
                     viewModel.onIconClick(applicationId)
                 },
-                onCardClick = { applicationId ->
-                    navController.navigate("DetailScreen/$applicationId")
-                }
+                onCardClick = onAppClicked
             )
         }
 

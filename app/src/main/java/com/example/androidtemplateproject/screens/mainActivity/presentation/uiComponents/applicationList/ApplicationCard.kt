@@ -1,6 +1,5 @@
 package com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList
 
-import android.util.Size
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -24,19 +23,12 @@ import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationD
 
 @Composable
 internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Unit, onCardClick: (String) -> Unit) {
-    val rowHorizontalPadding = 6
-    val rowHeight = 100
-    val appCardImageSize = Size(80, 80)
-    val labelsSpacerHeight = 2
-    val textColumnStartPadding = 6
-    val cornerRadius = 20
-
     Row(
         modifier = Modifier
-            .padding(horizontal = rowHorizontalPadding.dp)
-            .height(rowHeight.dp)
+            .padding(horizontal = 6.dp)
+            .height(100.dp)
             .fillMaxWidth()
-            .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
+            .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(Color.White)
             .clickable {
                 onCardClick(data.id)
@@ -45,7 +37,7 @@ internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Uni
     ) {
         Icon(
             modifier = Modifier
-                .size(appCardImageSize.width.dp, appCardImageSize.height.dp)
+                .size(80.dp)
                 .clickable {
                     onIconClick(data.id)
                 },
@@ -56,15 +48,15 @@ internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Uni
 
         Column(
             modifier = Modifier
-                .padding(start = textColumnStartPadding.dp)
+                .padding(start = 6.dp)
                 .align(Alignment.CenterVertically)
         ) {
 
             RowText(data.title, style = MaterialTheme.typography.titleMedium)
-            TextSpacer(labelsSpacerHeight)
+            TextSpacer(2)
 
             RowText(data.subtitle, style = MaterialTheme.typography.bodyMedium)
-            TextSpacer(labelsSpacerHeight)
+            TextSpacer(2)
 
             RowText(data.category, style = MaterialTheme.typography.bodySmall)
         }

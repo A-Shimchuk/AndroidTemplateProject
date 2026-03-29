@@ -44,41 +44,36 @@ internal fun DetailScreen() {
 
 @Composable
 private fun AppDetailsContent(appDetails: ApplicationData) {
-    val safeAreaTopPadding = 60
-    val defaultPadding = 16
-    val spacerHeight = 8
-    val category = "Категория:"
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(
-                top = safeAreaTopPadding.dp,
-                start = defaultPadding.dp,
-                end = defaultPadding.dp
+                top = 60.dp,
+                start = 16.dp,
+                end = 16.dp
             )
     ) {
         Icon(
             imageVector = appDetails.icon,
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null,
-            modifier = Modifier.padding(bottom = defaultPadding.dp)
+            modifier = Modifier.padding(bottom = 16.dp)
         )
 
         RowText(
             text = appDetails.title,
             style = MaterialTheme.typography.headlineMedium
         )
-        TextSpacer(height = spacerHeight)
+        TextSpacer(height = 8)
 
         RowText(
             text = appDetails.subtitle,
             style = MaterialTheme.typography.bodyLarge
         )
-        TextSpacer(height = spacerHeight)
+        TextSpacer(height = 8)
 
         RowText(
-            text = "${category} ${appDetails.category}",
+            text = "Категория: ${appDetails.category}",
             style = MaterialTheme.typography.bodyMedium
         )
     }
