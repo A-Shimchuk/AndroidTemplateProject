@@ -23,7 +23,7 @@ class ApplicationsAPI {
     suspend fun getApplications(): List<ApplicationDTO> {
         delay(800)
 
-        return return listOf(
+        return listOf(
             ApplicationDTO(
                 id = "phone",
                 image = Icons.Default.MailOutline,

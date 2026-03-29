@@ -36,7 +36,7 @@ class MainActivityViewModel : ViewModel() {
     val snackbarEvent = _snackbarEvent.receiveAsFlow()
 
     init {
-        getApplciations()
+        getApplications()
     }
 
     fun onIconClick(appId: String) {
@@ -45,7 +45,7 @@ class MainActivityViewModel : ViewModel() {
         }
     }
 
-    private fun getApplciations() {
+    private fun getApplications() {
         viewModelScope.launch {
             _state.value = MainActivityState.Loading
             delay(timeMillis = 300)

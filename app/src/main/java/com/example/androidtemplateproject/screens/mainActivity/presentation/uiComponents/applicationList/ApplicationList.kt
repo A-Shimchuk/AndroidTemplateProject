@@ -25,7 +25,6 @@ internal fun ApplicationsListView(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding()
             .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(Color.White)
     ) {
