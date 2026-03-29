@@ -16,6 +16,18 @@ import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
 import com.example.androidtemplateproject.screens.repositories.AppRepository
 import com.example.androidtemplateproject.screens.mainActivity.theme.AndroidTemplateProjectTheme
+import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityScreen
+
+sealed class Screen(val route: String) {
+    data object Main : Screen("main")
+    data object Detail : Screen("detail/{applicationId}") {
+        fun createRoute(applicationId: String) = "detail/$applicationId"
+    }
+
+    companion object {
+        const val ARG_APPLICATION_ID = "applicationId"
+    }
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,16 +41,20 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = "MainActivity",
+                        startDestination = Screen.Main.route,
                         modifier = Modifier.padding()
                     ) {
-                        composable("MainActivity") {
-                            MainActivityView(navController)
+                        composable(Screen.Main.route) {
+                            MainActivityScreen(
+                                onAppClicked = { applicationId ->
+                                    navController.navigate(Screen.Detail.createRoute(applicationId))
+                                }
+                            )
                         }
 
                         composable(
-                            route = "DetailScreen/{applicationId}",
-                            arguments = listOf(navArgument("applicationId") {
+                            route = Screen.Detail.route,
+                            arguments = listOf(navArgument(Screen.ARG_APPLICATION_ID) {
                                 type = NavType.StringType
                             })
                         ) { backStackEntry ->

@@ -16,14 +16,17 @@ import androidx.compose.ui.unit.dp
 import com.example.androidtemplateproject.dto.ApplicationData
 
 @Composable
-internal fun ApplicationsListView(modifier: Modifier? = null, applications: List<ApplicationData>, onIconClick: (String) -> Unit, onCardClick: (String) -> Unit) {
-    val cornerRadius = 20
-
+internal fun ApplicationsListView(
+    modifier: Modifier = Modifier,
+    applications: List<ApplicationData>,
+    onIconClick: (String) -> Unit,
+    onCardClick: (String) -> Unit
+) {
     Column(
-        modifier = modifier ?: Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding()
-            .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
+            .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(Color.White)
     ) {
         LazyColumn(
@@ -31,7 +34,7 @@ internal fun ApplicationsListView(modifier: Modifier? = null, applications: List
                 .fillMaxSize()
                 .background(
                     color = Color.White,
-                    shape = RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp)
+                    shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
                 )
         ) {
             itemsIndexed(applications) { index, application ->
