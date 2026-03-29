@@ -17,12 +17,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.baseUIComponents.RowText
-import com.example.androidtemplateproject.baseUIComponents.TextSpacer
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
+import com.example.androidtemplateproject.sharedUIComponents.RowText
+import com.example.androidtemplateproject.sharedUIComponents.TextSpacer
 import com.example.androidtemplateproject.screens.detailScreen.presentation.DetailScreenState
 import com.example.androidtemplateproject.screens.detailScreen.presentation.DetailScreenViewModel
-import com.example.androidtemplateproject.screens.mainActivity.theme.MainColor
+import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.MainColor
 
 @Composable
 internal fun DetailScreen() {

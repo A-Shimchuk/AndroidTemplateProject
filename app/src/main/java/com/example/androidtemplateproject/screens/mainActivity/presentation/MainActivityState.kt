@@ -1,6 +1,6 @@
 package com.example.androidtemplateproject.screens.mainActivity.presentation
 
-import com.example.androidtemplateproject.dto.ApplicationData
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
 
 sealed interface MainActivityState {
     data class Content constructor(

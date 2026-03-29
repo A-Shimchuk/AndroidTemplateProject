@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.dto.ApplicationData
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
 
 @Composable
 internal fun ApplicationsListView(
@@ -25,7 +25,6 @@ internal fun ApplicationsListView(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding()
             .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(Color.White)
     ) {

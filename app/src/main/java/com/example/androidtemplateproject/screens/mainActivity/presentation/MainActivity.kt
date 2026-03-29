@@ -14,9 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
-import com.example.androidtemplateproject.screens.repositories.AppRepository
-import com.example.androidtemplateproject.screens.mainActivity.theme.AndroidTemplateProjectTheme
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityScreen
+import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.AndroidTemplateProjectTheme
 
 sealed class Screen(val route: String) {
     data object Main : Screen("main")
