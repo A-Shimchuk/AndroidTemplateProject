@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.detailScreen.theme
+package com.example.androidtemplateproject.screens.detailScreen.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

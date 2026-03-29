@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.baseUIComponents
+package com.example.androidtemplateproject.sharedUIComponents
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

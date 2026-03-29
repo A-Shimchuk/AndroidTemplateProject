@@ -3,8 +3,12 @@ package com.example.androidtemplateproject.screens.detailScreen.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.screens.repositories.AppRepository
+import com.example.androidtemplateproject.screens.detailScreen.domain.GetApplicationDetailsUseCase
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationMapper
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationsAPI
+import com.example.androidtemplateproject.screens.mainActivity.domain.AppRepository
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
+import com.example.androidtemplateproject.screens.mainActivity.data.AppRepositoryImpl
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,11 +16,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class DetailScreenViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
-    companion object LocalConstants {
-        val delayValue: Long = 800
-    }
-
-    private val appRepository = AppRepository()
+    private val useCase = GetApplicationDetailsUseCase(
+        repository = AppRepositoryImpl(
+            mapper = ApplicationMapper(),
+            api = ApplicationsAPI()
+        )
+    )
     private val _state = MutableStateFlow<DetailScreenState>(DetailScreenState.Loading)
     val state: StateFlow<DetailScreenState> = _state.asStateFlow()
 
@@ -28,9 +33,10 @@ class DetailScreenViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
     private fun getAppById(id: String) {
         viewModelScope.launch {
             _state.value = DetailScreenState.Loading
-            delay(timeMillis = delayValue)
+            delay(timeMillis = 300)
 
-            val application: ApplicationData? = appRepository.getApplicationById(id)
+            val application: ApplicationData? = useCase.invoke(id)
+
             application?.let {
                 _state.value = DetailScreenState.Content(application)
             } ?: run {

@@ -18,11 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityViewModel
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
 import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList.ApplicationsListView
 import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header.HeaderView
-import com.example.androidtemplateproject.screens.mainActivity.theme.MainColor
+import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.MainColor
 
 
 @Composable

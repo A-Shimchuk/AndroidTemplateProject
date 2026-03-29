@@ -1,9 +1,10 @@
-package com.example.androidtemplateproject.dto
+package com.example.androidtemplateproject.sharedDomainComponents
+
 import androidx.compose.ui.graphics.vector.ImageVector
 
-data class ApplicationData(
+data class ApplicationDTO(
     val id: String,
-    val icon: ImageVector,
+    val image: ImageVector,
     val title: String,
     val subtitle: String,
     val category: String

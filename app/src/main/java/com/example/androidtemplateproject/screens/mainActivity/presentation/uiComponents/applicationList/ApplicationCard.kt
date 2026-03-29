@@ -18,9 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.baseUIComponents.RowText
-import com.example.androidtemplateproject.baseUIComponents.TextSpacer
-import com.example.androidtemplateproject.dto.ApplicationData
+import com.example.androidtemplateproject.sharedUIComponents.RowText
+import com.example.androidtemplateproject.sharedUIComponents.TextSpacer
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
 
 @Composable
 internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Unit, onCardClick: (String) -> Unit) {
