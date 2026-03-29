@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.uiComponents.applicationList
+package com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.example.androidtemplateproject.dto.ApplicationData
 
 @Composable
-internal fun ApplicationsListView(modifier: Modifier? = null, applications: List<ApplicationData>, onApplicationClick: (String) -> Unit) {
+internal fun ApplicationsListView(modifier: Modifier? = null, applications: List<ApplicationData>, onIconClick: (String) -> Unit, onCardClick: (String) -> Unit) {
     val cornerRadius = 20
 
     Column(
@@ -37,7 +37,8 @@ internal fun ApplicationsListView(modifier: Modifier? = null, applications: List
             itemsIndexed(applications) { index, application ->
                 ApplicationCard(
                     data = application,
-                    onApplicationClick = onApplicationClick
+                    onIconClick = onIconClick,
+                    onCardClick = onCardClick
                 )
 
                 if (index < applications.size - 1) {

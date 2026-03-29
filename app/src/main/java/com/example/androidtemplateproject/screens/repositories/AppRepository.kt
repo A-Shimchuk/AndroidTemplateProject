@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.repositories
+package com.example.androidtemplateproject.screens.repositories
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox

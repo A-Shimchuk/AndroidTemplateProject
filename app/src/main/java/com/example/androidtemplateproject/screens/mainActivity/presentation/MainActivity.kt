@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity
+package com.example.androidtemplateproject.screens.mainActivity.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,12 +14,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
-import com.example.androidtemplateproject.screens.mainActivity.repositories.AppRepository
+import com.example.androidtemplateproject.screens.repositories.AppRepository
 import com.example.androidtemplateproject.screens.mainActivity.theme.AndroidTemplateProjectTheme
 // FIXME: - TO BE DONE
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val viewModel = MainActivityViewModel()
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,7 +33,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding()
                     ) {
                         composable("MainActivity") {
-                            MainActivityView(navController, viewModel = viewModel)
+                            MainActivityView(navController)
                         }
 
                         composable(
@@ -43,13 +42,7 @@ class MainActivity : ComponentActivity() {
                                 type = NavType.StringType
                             })
                         ) { backStackEntry ->
-                            val appId = backStackEntry.arguments?.getString("applicationId")
-                                ?: return@composable
-                            val application =
-                                AppRepository().getApplicationById(
-                                    appId
-                                )
-                            application?.let { DetailScreen(data = it) }
+                            DetailScreen()
                         }
                     }
                 }
