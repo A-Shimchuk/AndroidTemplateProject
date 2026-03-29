@@ -1,6 +1,5 @@
 package com.example.androidtemplateproject.presentation.uiComponents.applicationList
 
-import android.util.Size
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -22,17 +21,12 @@ import com.example.androidtemplateproject.models.AppicationData
 
 @Composable
 fun ApplicationCard(data: AppicationData, onApplicationClick: (String) -> Unit) {
-    val appCardImageSize = Size(80, 80)
-    val labelsSpacerHeight = 2
-    val textColumnStartPadding = 6
-    val cornerRadius = 20
-
     Row(
         modifier = Modifier
             .padding(horizontal = 6.dp)
             .height(100.dp)
             .fillMaxWidth()
-            .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
+            .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(Color.White)
             .clickable {
                 onApplicationClick(data.id)
@@ -41,7 +35,7 @@ fun ApplicationCard(data: AppicationData, onApplicationClick: (String) -> Unit) 
     ) {
         Icon(
             modifier = Modifier
-                .size(appCardImageSize.width.dp, appCardImageSize.height.dp),
+                .size(80.dp),
             imageVector = data.icon,
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null
@@ -49,15 +43,15 @@ fun ApplicationCard(data: AppicationData, onApplicationClick: (String) -> Unit) 
 
         Column(
             modifier = Modifier
-                .padding(start = textColumnStartPadding.dp)
+                .padding(start = 6.dp)
                 .align(Alignment.CenterVertically)
         ) {
 
             RowText(data.title, style = MaterialTheme.typography.titleMedium)
-            TextSpacer(labelsSpacerHeight)
+            TextSpacer(2)
 
             RowText(data.subtitle, style = MaterialTheme.typography.bodyMedium)
-            TextSpacer(labelsSpacerHeight)
+            TextSpacer(2)
 
             RowText(data.category, style = MaterialTheme.typography.bodySmall)
         }

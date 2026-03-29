@@ -16,11 +16,14 @@ import androidx.compose.ui.unit.dp
 import com.example.androidtemplateproject.repositories.Repository
 
 @Composable
-fun ApplicationsListView(modifier: Modifier? = null, onApplicationClick: (String) -> Unit) {
+fun ApplicationsListView(
+    modifier: Modifier = Modifier,
+    onApplicationClick: (String) -> Unit
+) {
     val cornerRadius = 20
 
     Column(
-        modifier = modifier ?: Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding()
             .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
