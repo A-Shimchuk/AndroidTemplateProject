@@ -15,7 +15,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
 import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.AndroidTemplateProjectTheme
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityScreen
 
 sealed class Screen(val route: String) {
     data object Main : Screen("main")
@@ -28,7 +27,6 @@ sealed class Screen(val route: String) {
     }
 }
 
-// FIXME: - TO BE DONE
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
