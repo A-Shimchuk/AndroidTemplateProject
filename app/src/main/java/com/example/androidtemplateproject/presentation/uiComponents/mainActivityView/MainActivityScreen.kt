@@ -11,7 +11,7 @@ import com.example.androidtemplateproject.presentation.uiComponents.header.Heade
 import com.example.androidtemplateproject.presentation.theme.MainColor
 
 @Composable
-fun MainActivityView(
+fun MainActivityScreen(
     onAppClicked: (String) -> Unit
 ) {
     Column(

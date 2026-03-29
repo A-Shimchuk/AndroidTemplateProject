@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import com.example.androidtemplateproject.DetailScreen
 import com.example.androidtemplateproject.repositories.Repository
 import com.example.androidtemplateproject.presentation.theme.AndroidTemplateProjectTheme
-import com.example.androidtemplateproject.presentation.uiComponents.mainActivityView.MainActivityView
+import com.example.androidtemplateproject.presentation.uiComponents.mainActivityView.MainActivityScreen
 
 sealed class Screen(val route: String) {
     data object Main : Screen("main")
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding()
                     ) {
                         composable(Screen.Main.route) {
-                            MainActivityView(
+                            MainActivityScreen(
                                 onAppClicked = { applicationId ->
                                     navController.navigate(Screen.Detail.createRoute(applicationId))
                                 }
