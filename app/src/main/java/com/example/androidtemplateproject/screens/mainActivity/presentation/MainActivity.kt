@@ -26,7 +26,7 @@ sealed class Screen(val route: String) {
         const val ARG_APPLICATION_ID = "applicationId"
     }
 }
-
+// FIXME: - Homework 14. Empty commit
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
