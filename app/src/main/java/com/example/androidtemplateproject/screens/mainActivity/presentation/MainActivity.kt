@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity
+package com.example.androidtemplateproject.screens.mainActivity.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,13 +14,21 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
-import com.example.androidtemplateproject.screens.mainActivity.repositories.AppRepository
-import com.example.androidtemplateproject.screens.mainActivity.theme.AndroidTemplateProjectTheme
+import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.AndroidTemplateProjectTheme
 
-// FIXME: - TO BE DONE
+sealed class Screen(val route: String) {
+    data object Main : Screen("main")
+    data object Detail : Screen("detail/{applicationId}") {
+        fun createRoute(applicationId: String) = "detail/$applicationId"
+    }
+
+    companion object {
+        const val ARG_APPLICATION_ID = "applicationId"
+    }
+}
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val viewModel = MainActivityViewModel()
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,26 +39,24 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = "MainActivity",
+                        startDestination = Screen.Main.route,
                         modifier = Modifier.padding()
                     ) {
-                        composable("MainActivity") {
-                            MainActivityView(navController, viewModel = viewModel)
+                        composable(Screen.Main.route) {
+                            MainActivityScreen(
+                                onAppClicked = { applicationId ->
+                                    navController.navigate(Screen.Detail.createRoute(applicationId))
+                                }
+                            )
                         }
 
                         composable(
-                            route = "DetailScreen/{applicationId}",
-                            arguments = listOf(navArgument("applicationId") {
+                            route = Screen.Detail.route,
+                            arguments = listOf(navArgument(Screen.ARG_APPLICATION_ID) {
                                 type = NavType.StringType
                             })
                         ) { backStackEntry ->
-                            val appId = backStackEntry.arguments?.getString("applicationId")
-                                ?: return@composable
-                            val application =
-                                AppRepository().getApplicationById(
-                                    appId
-                                )
-                            application?.let { DetailScreen(data = it) }
+                            DetailScreen()
                         }
                     }
                 }

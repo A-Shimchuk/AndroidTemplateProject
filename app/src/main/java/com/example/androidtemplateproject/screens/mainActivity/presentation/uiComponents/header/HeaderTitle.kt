@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.uiComponents.header
+package com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

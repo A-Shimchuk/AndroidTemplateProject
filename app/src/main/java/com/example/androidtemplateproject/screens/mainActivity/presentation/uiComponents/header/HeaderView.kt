@@ -1,6 +1,5 @@
-package com.example.androidtemplateproject.screens.mainActivity.uiComponents.header
+package com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header
 
-import android.util.Size
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +16,7 @@ internal fun HeaderView(modifier: Modifier? = null) {
     val rowHeight = 70
     val defaultPadding = 16
     val safeAreaSpacerHeight = 30
-    val iconSize = Size(50, 50)
+    val iconSize = 50
 
     Spacer(modifier = Modifier.height(safeAreaSpacerHeight.dp))
 
@@ -30,7 +29,7 @@ internal fun HeaderView(modifier: Modifier? = null) {
         HeaderIcon(
             Modifier
                 .padding(start = defaultPadding.dp)
-                .size(iconSize.width.dp, iconSize.height.dp)
+                .size(iconSize.dp)
         )
 
         HeaderTitle(
@@ -42,7 +41,7 @@ internal fun HeaderView(modifier: Modifier? = null) {
         HeaderIcon(
             Modifier
                 .padding(end = defaultPadding.dp)
-                .size(iconSize.width.dp, iconSize.height.dp)
+                .size(iconSize.dp)
         )
     }
 }

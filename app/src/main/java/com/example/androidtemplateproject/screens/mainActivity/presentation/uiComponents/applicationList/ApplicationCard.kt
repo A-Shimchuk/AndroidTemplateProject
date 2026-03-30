@@ -1,6 +1,5 @@
-package com.example.androidtemplateproject.screens.mainActivity.uiComponents.applicationList
+package com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList
 
-import android.util.Size
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -18,32 +17,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.baseUIComponents.RowText
-import com.example.androidtemplateproject.baseUIComponents.TextSpacer
-import com.example.androidtemplateproject.dto.ApplicationData
+import com.example.androidtemplateproject.sharedUIComponents.RowText
+import com.example.androidtemplateproject.sharedUIComponents.TextSpacer
+import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
 
 @Composable
-internal fun ApplicationCard(data: ApplicationData, onApplicationClick: (String) -> Unit) {
-    val appCardImageSize = Size(80, 80)
-    val labelsSpacerHeight = 2
-    val textColumnStartPadding = 6
-    val cornerRadius = 20
-
+internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Unit, onCardClick: (String) -> Unit) {
     Row(
         modifier = Modifier
             .padding(horizontal = 6.dp)
             .height(100.dp)
             .fillMaxWidth()
-            .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
+            .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(Color.White)
             .clickable {
-                onApplicationClick(data.id)
+                onCardClick(data.id)
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             modifier = Modifier
-                .size(appCardImageSize.width.dp, appCardImageSize.height.dp),
+                .size(80.dp)
+                .clickable {
+                    onIconClick(data.id)
+                },
             imageVector = data.icon,
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null
@@ -51,15 +48,15 @@ internal fun ApplicationCard(data: ApplicationData, onApplicationClick: (String)
 
         Column(
             modifier = Modifier
-                .padding(start = textColumnStartPadding.dp)
+                .padding(start = 6.dp)
                 .align(Alignment.CenterVertically)
         ) {
 
             RowText(data.title, style = MaterialTheme.typography.titleMedium)
-            TextSpacer(labelsSpacerHeight)
+            TextSpacer(2)
 
             RowText(data.subtitle, style = MaterialTheme.typography.bodyMedium)
-            TextSpacer(labelsSpacerHeight)
+            TextSpacer(2)
 
             RowText(data.category, style = MaterialTheme.typography.bodySmall)
         }
