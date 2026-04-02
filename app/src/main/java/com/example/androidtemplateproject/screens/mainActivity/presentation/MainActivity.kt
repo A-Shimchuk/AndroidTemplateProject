@@ -15,7 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
 import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.AndroidTemplateProjectTheme
-
+// FIXME: - Очередной подлый МР, на будущую реализацию ДЗ
 sealed class Screen(val route: String) {
     data object Main : Screen("main")
     data object Detail : Screen("detail/{applicationId}") {
