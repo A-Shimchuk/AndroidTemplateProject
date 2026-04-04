@@ -1,7 +1,7 @@
 package com.example.androidtemplateproject.screens.appList.data
 
 import com.example.androidtemplateproject.screens.appList.domain.AppRepository
-import com.example.androidtemplateproject.screens.appList.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 
 class AppRepositoryImpl(
     private val mapper: ApplicationMapper,

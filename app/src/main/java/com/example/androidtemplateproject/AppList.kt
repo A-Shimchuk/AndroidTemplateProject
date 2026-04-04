@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.appList.presentation
+package com.example.androidtemplateproject
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,8 +13,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.androidtemplateproject.DetailScreen
-import com.example.androidtemplateproject.screens.appList.presentation.theme.AndroidTemplateProjectTheme
+import com.example.androidtemplateproject.screens.appList.presentation.AppListScreen
+import com.example.androidtemplateproject.sharedUIComponents.theme.AndroidTemplateProjectTheme
 
 sealed class Screen(val route: String) {
     data object Main : Screen("main")

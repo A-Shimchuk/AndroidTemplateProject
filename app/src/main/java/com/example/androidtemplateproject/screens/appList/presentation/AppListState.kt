@@ -1,6 +1,6 @@
 package com.example.androidtemplateproject.screens.appList.presentation
 
-import com.example.androidtemplateproject.screens.appList.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 
 sealed interface AppListState {
     data class Content(
