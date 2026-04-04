@@ -49,7 +49,7 @@ class AppDetails : ComponentActivity() {
 
                         composable(
                             route = Screen.Detail.route,
-                            arguments = listOf(navArgument(Screen.ARG_APPLICATION_ID) {
+                            arguments = listOf(navArgument(Screen.Detail.ARG_APPLICATION_ID) {
                                 type = NavType.StringType
                             })
                         ) { backStackEntry ->
