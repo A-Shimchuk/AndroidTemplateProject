@@ -1,7 +1,7 @@
-package com.example.androidtemplateproject.screens.mainActivity.data
+package com.example.androidtemplateproject.screens.appList.data
 
-import com.example.androidtemplateproject.screens.mainActivity.domain.AppRepository
-import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.domain.AppRepository
+import com.example.androidtemplateproject.screens.appList.data.ApplicationData
 
 class AppRepositoryImpl(
     private val mapper: ApplicationMapper,

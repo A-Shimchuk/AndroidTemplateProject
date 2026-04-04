@@ -1,6 +1,6 @@
 package com.example.androidtemplateproject.screens.detailScreen.presentation
 
-import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.data.ApplicationData
 
 sealed interface DetailScreenState {
     data class Content(

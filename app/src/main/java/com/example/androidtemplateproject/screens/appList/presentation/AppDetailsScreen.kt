@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.presentation
+package com.example.androidtemplateproject.screens.appList.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,20 +17,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityViewModel
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityEvent
-import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList.ApplicationsListView
-import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header.HeaderView
-import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.MainColor
+import com.example.androidtemplateproject.screens.appList.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.presentation.AppDetailsViewModel
+import com.example.androidtemplateproject.screens.appList.presentation.AppDetailsEvent
+import com.example.androidtemplateproject.screens.appList.presentation.uiComponents.applicationList.ApplicationsListView
+import com.example.androidtemplateproject.screens.appList.presentation.uiComponents.header.HeaderView
+import com.example.androidtemplateproject.screens.appList.presentation.theme.MainColor
 
 
 @Composable
-fun MainActivityScreen(
+fun AppDetailsScreen(
     onAppClicked: (String) -> Unit
 ) {
     // Благодаря viewModel - модель не пересоздается при пересоздании composable-функции
-    val viewModel = viewModel<MainActivityViewModel>()
+    val viewModel = viewModel<AppDetailsViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     // Управление Snackbar
@@ -40,7 +40,7 @@ fun MainActivityScreen(
     LaunchedEffect(Unit) {
         viewModel.snackbarEvent.collect { event ->
             when (event) {
-                is MainActivityEvent.SnackbarShown -> {
+                is AppDetailsEvent.SnackbarShown -> {
                     snackbarHostState.showSnackbar(event.message)
                 }
             }
@@ -48,7 +48,7 @@ fun MainActivityScreen(
     }
 
     when (val currentState = state) {
-        is MainActivityState.Content -> {
+        is AppDetailsState.Content -> {
             ApplicationsList(
                 onAppClicked = onAppClicked,
                 applications = currentState.applicationsData,
@@ -57,11 +57,11 @@ fun MainActivityScreen(
             )
         }
 
-        MainActivityState.Error -> {
+        AppDetailsState.Error -> {
             Error()
         }
 
-        MainActivityState.Loading -> {
+        AppDetailsState.Loading -> {
             Loader()
         }
     }
@@ -71,7 +71,7 @@ fun MainActivityScreen(
 private fun ApplicationsList(
     onAppClicked: (String) -> Unit,
     applications: List<ApplicationData>,
-    viewModel: MainActivityViewModel,
+    viewModel: AppDetailsViewModel,
     snackbarHostState: SnackbarHostState
 ) {
     Box(modifier = Modifier.fillMaxSize()) {

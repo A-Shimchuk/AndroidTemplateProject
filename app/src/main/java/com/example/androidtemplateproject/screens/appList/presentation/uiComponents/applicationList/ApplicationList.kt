@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList
+package com.example.androidtemplateproject.screens.appList.presentation.uiComponents.applicationList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.data.ApplicationData
 
 @Composable
 internal fun ApplicationsListView(

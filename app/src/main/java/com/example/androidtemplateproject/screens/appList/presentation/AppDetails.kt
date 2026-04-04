@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.presentation
+package com.example.androidtemplateproject.screens.appList.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,7 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
-import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.AndroidTemplateProjectTheme
+import com.example.androidtemplateproject.screens.appList.presentation.theme.AndroidTemplateProjectTheme
 
 sealed class Screen(val route: String) {
     data object Main : Screen("main")
@@ -24,7 +24,7 @@ sealed class Screen(val route: String) {
     }
 }
 
-class MainActivity : ComponentActivity() {
+class AppDetails : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding()
                     ) {
                         composable(Screen.Main.route) {
-                            MainActivityScreen(
+                            AppDetailsScreen(
                                 onAppClicked = { applicationId ->
                                     navController.navigate(Screen.Detail.createRoute(applicationId))
                                 }

@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header
+package com.example.androidtemplateproject.screens.appList.presentation.uiComponents.header
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

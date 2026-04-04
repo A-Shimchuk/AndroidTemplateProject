@@ -1,12 +1,12 @@
-package com.example.androidtemplateproject.screens.mainActivity.presentation
+package com.example.androidtemplateproject.screens.appList.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationMapper
-import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationsAPI
-import com.example.androidtemplateproject.screens.mainActivity.domain.GetApplicationsUseCase
-import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
-import com.example.androidtemplateproject.screens.mainActivity.data.AppRepositoryImpl
+import com.example.androidtemplateproject.screens.appList.data.ApplicationMapper
+import com.example.androidtemplateproject.screens.appList.data.ApplicationsAPI
+import com.example.androidtemplateproject.screens.appList.domain.GetApplicationsUseCase
+import com.example.androidtemplateproject.screens.appList.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.data.AppRepositoryImpl
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,11 +15,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-sealed interface MainActivityEvent {
-    data class SnackbarShown(val message: String) : MainActivityEvent
+sealed interface AppDetailsEvent {
+    data class SnackbarShown(val message: String) : AppDetailsEvent
 }
 
-class MainActivityViewModel : ViewModel() {
+class AppDetailsViewModel : ViewModel() {
     private companion object LocalConstants{
         private const val SNACKBAR_TEXT = "Произошел показ снекбара"
         private const val DELAY_VALUE: Long = 300
@@ -33,10 +33,10 @@ class MainActivityViewModel : ViewModel() {
         )
     )
 
-    private val _state = MutableStateFlow<MainActivityState>(MainActivityState.Loading)
-    val state: StateFlow<MainActivityState> = _state.asStateFlow()
+    private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
+    val state: StateFlow<AppDetailsState> = _state.asStateFlow()
 
-    private val _snackbarEvent = Channel<MainActivityEvent>()
+    private val _snackbarEvent = Channel<AppDetailsEvent>()
     val snackbarEvent = _snackbarEvent.receiveAsFlow()
 
     init {
@@ -45,17 +45,17 @@ class MainActivityViewModel : ViewModel() {
 
     fun onIconClick() {
         viewModelScope.launch {
-            _snackbarEvent.send(MainActivityEvent.SnackbarShown(SNACKBAR_TEXT))
+            _snackbarEvent.send(AppDetailsEvent.SnackbarShown(SNACKBAR_TEXT))
         }
     }
 
     private fun getApplications() {
         viewModelScope.launch {
-            _state.value = MainActivityState.Loading
+            _state.value = AppDetailsState.Loading
             delay(timeMillis = DELAY_VALUE)
 
             val applications: List<ApplicationData> = useCase.invoke()
-            _state.value = MainActivityState.Content(applications)
+            _state.value = AppDetailsState.Content(applications)
         }
     }
 }
