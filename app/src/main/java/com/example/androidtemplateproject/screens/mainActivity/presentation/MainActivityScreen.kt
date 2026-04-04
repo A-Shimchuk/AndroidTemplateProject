@@ -19,6 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androidtemplateproject.screens.mainActivity.data.ApplicationData
 import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityViewModel
+import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityEvent
 import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList.ApplicationsListView
 import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header.HeaderView
 import com.example.androidtemplateproject.screens.mainActivity.presentation.theme.MainColor
@@ -37,14 +38,18 @@ fun MainActivityScreen(
 
     // Подписываемся на события snackbar из модельки
     LaunchedEffect(Unit) {
-        viewModel.snackbarEvent.collect { message ->
-            snackbarHostState.showSnackbar(message)
+        viewModel.snackbarEvent.collect { event ->
+            when (event) {
+                is MainActivityEvent.SnackbarShown -> {
+                    snackbarHostState.showSnackbar(event.message)
+                }
+            }
         }
     }
 
     when (val currentState = state) {
         is MainActivityState.Content -> {
-            ShowApplicationsList(
+            ApplicationsList(
                 onAppClicked = onAppClicked,
                 applications = currentState.applicationsData,
                 viewModel = viewModel,
@@ -53,17 +58,17 @@ fun MainActivityScreen(
         }
 
         MainActivityState.Error -> {
-            ShowError()
+            Error()
         }
 
         MainActivityState.Loading -> {
-            ShowLoader()
+            Loader()
         }
     }
 }
 
 @Composable
-private fun ShowApplicationsList(
+private fun ApplicationsList(
     onAppClicked: (String) -> Unit,
     applications: List<ApplicationData>,
     viewModel: MainActivityViewModel,
@@ -80,7 +85,7 @@ private fun ShowApplicationsList(
             ApplicationsListView(
                 applications = applications,
                 onIconClick = { applicationId ->
-                    viewModel.onIconClick(applicationId)
+                    viewModel.onIconClick()
                 },
                 onCardClick = onAppClicked
             )
@@ -91,7 +96,7 @@ private fun ShowApplicationsList(
 }
 
 @Composable
-private fun ShowLoader() {
+private fun Loader() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -103,7 +108,7 @@ private fun ShowLoader() {
 }
 
 @Composable
-private fun ShowError() {
+private fun Error() {
     Box(
         modifier = Modifier
             .fillMaxSize()

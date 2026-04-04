@@ -34,10 +34,10 @@ internal fun DetailScreen() {
             AppDetailsContent(currentState.applicationData)
         }
         DetailScreenState.Error -> {
-            ShowError()
+            Error()
         }
         DetailScreenState.Loading -> {
-            ShowLoader()
+            Loader()
         }
     }
 }
@@ -80,7 +80,7 @@ private fun AppDetailsContent(appDetails: ApplicationData) {
 }
 
 @Composable
-private fun ShowLoader() {
+private fun Loader() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -92,7 +92,7 @@ private fun ShowLoader() {
 }
 
 @Composable
-private fun ShowError() {
+private fun Error() {
     Box(
         modifier = Modifier
             .fillMaxSize()

@@ -19,11 +19,8 @@ import com.example.androidtemplateproject.screens.mainActivity.presentation.them
 sealed class Screen(val route: String) {
     data object Main : Screen("main")
     data object Detail : Screen("detail/{applicationId}") {
-        fun createRoute(applicationId: String) = "detail/$applicationId"
-    }
-
-    companion object {
         const val ARG_APPLICATION_ID = "applicationId"
+        fun createRoute(applicationId: String) = "detail/$applicationId"
     }
 }
 

@@ -15,10 +15,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
+sealed interface MainActivityEvent {
+    data class SnackbarShown(val message: String) : MainActivityEvent
+}
+
 class MainActivityViewModel : ViewModel() {
     private companion object LocalConstants{
-        // FIXME: - Вынести
-        val snackbarText = "Произошел показ снекбара"
+        private const val SNACKBAR_TEXT = "Произошел показ снекбара"
+        private const val DELAY_VALUE: Long = 300
     }
 
     // FIXME: Временно инжектим так, далее будет DI
@@ -32,30 +36,26 @@ class MainActivityViewModel : ViewModel() {
     private val _state = MutableStateFlow<MainActivityState>(MainActivityState.Loading)
     val state: StateFlow<MainActivityState> = _state.asStateFlow()
 
-    private val _snackbarEvent = Channel<String>()
+    private val _snackbarEvent = Channel<MainActivityEvent>()
     val snackbarEvent = _snackbarEvent.receiveAsFlow()
 
     init {
         getApplications()
     }
 
-    fun onIconClick(appId: String) {
+    fun onIconClick() {
         viewModelScope.launch {
-            _snackbarEvent.send(snackbarText)
+            _snackbarEvent.send(MainActivityEvent.SnackbarShown(SNACKBAR_TEXT))
         }
     }
 
     private fun getApplications() {
         viewModelScope.launch {
             _state.value = MainActivityState.Loading
-            delay(timeMillis = 300)
+            delay(timeMillis = DELAY_VALUE)
 
             val applications: List<ApplicationData> = useCase.invoke()
-            applications.let {
-                _state.value = MainActivityState.Content(applications)
-            } ?: run {
-                _state.value = MainActivityState.Error
-            }
+            _state.value = MainActivityState.Content(applications)
         }
     }
 }
