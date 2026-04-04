@@ -17,10 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.androidtemplateproject.screens.appList.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 import com.example.androidtemplateproject.screens.appList.presentation.uiComponents.applicationList.ApplicationsListView
 import com.example.androidtemplateproject.screens.appList.presentation.uiComponents.header.HeaderView
-import com.example.androidtemplateproject.screens.appList.presentation.theme.MainColor
+import com.example.androidtemplateproject.sharedUIComponents.theme.MainColor
 
 
 @Composable

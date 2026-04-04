@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidTemplateProject">
         <activity
-            android:name=".screens.appList.presentation.AppList"
+            android:name=".AppList"
             android:exported="true"
             android:theme="@style/Theme.AndroidTemplateProject">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.appList.presentation.theme
+package com.example.androidtemplateproject.sharedUIComponents.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

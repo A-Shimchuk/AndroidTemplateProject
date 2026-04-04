@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.appList.data
+package com.example.androidtemplateproject.screens.appList.domain
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

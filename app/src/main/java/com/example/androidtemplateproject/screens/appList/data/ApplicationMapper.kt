@@ -1,7 +1,7 @@
 package com.example.androidtemplateproject.screens.appList.data
 
 import com.example.androidtemplateproject.sharedDomainComponents.ApplicationDTO
-import com.example.androidtemplateproject.screens.appList.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 
 class ApplicationMapper {
     fun toApplicationData(dto: ApplicationDTO): ApplicationData {

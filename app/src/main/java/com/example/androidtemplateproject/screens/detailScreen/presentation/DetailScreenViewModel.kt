@@ -6,10 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.androidtemplateproject.screens.detailScreen.domain.GetApplicationDetailsUseCase
 import com.example.androidtemplateproject.screens.appList.data.ApplicationMapper
 import com.example.androidtemplateproject.screens.appList.data.ApplicationsAPI
-import com.example.androidtemplateproject.screens.appList.domain.AppRepository
-import com.example.androidtemplateproject.screens.appList.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 import com.example.androidtemplateproject.screens.appList.data.AppRepositoryImpl
-import com.example.androidtemplateproject.screens.appList.presentation.Screen
+import com.example.androidtemplateproject.Screen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +35,7 @@ class DetailScreenViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
             _state.value = DetailScreenState.Loading
             delay(timeMillis = DELAY_VALUE)
 
-            val application: ApplicationData? = useCase.invoke(id)
+            val application: ApplicationData? = useCase(id)
 
             application?.let {
                 _state.value = DetailScreenState.Content(application)

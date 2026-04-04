@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.androidtemplateproject.screens.appList.data.ApplicationMapper
 import com.example.androidtemplateproject.screens.appList.data.ApplicationsAPI
 import com.example.androidtemplateproject.screens.appList.domain.GetApplicationsUseCase
-import com.example.androidtemplateproject.screens.appList.data.ApplicationData
+import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 import com.example.androidtemplateproject.screens.appList.data.AppRepositoryImpl
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay

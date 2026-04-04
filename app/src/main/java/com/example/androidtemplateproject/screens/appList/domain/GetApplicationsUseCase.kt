@@ -1,8 +1,5 @@
 package com.example.androidtemplateproject.screens.appList.domain
 
-import com.example.androidtemplateproject.screens.appList.domain.AppRepository
-import com.example.androidtemplateproject.screens.appList.data.ApplicationData
-
 class GetApplicationsUseCase(
     private val repository: AppRepository
 ) {
