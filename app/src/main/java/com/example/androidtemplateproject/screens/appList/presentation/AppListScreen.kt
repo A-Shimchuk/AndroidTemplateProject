@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.presentation
+package com.example.androidtemplateproject.screens.appList.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,18 +18,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androidtemplateproject.dto.ApplicationData
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityViewModel
-import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.applicationList.ApplicationsListView
-import com.example.androidtemplateproject.screens.mainActivity.presentation.uiComponents.header.HeaderView
-import com.example.androidtemplateproject.screens.mainActivity.theme.MainColor
+import com.example.androidtemplateproject.screens.appList.presentation.AppListViewModel
+import com.example.androidtemplateproject.screens.appList.presentation.AppListState
+import com.example.androidtemplateproject.screens.appList.presentation.AppListEvent
+import com.example.androidtemplateproject.screens.appList.presentation.uiComponents.applicationList.ApplicationsListView
+import com.example.androidtemplateproject.screens.appList.presentation.uiComponents.header.HeaderView
+import com.example.androidtemplateproject.screens.appList.theme.MainColor
 
 
 @Composable
-fun MainActivityScreen(
+fun AppListScreen(
     onAppClicked: (String) -> Unit
 ) {
     // Благодаря viewModel - модель не пересоздается при пересоздании composable-функции
-    val viewModel = viewModel<MainActivityViewModel>()
+    val viewModel = viewModel<AppListViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     // Управление Snackbar
@@ -37,36 +39,40 @@ fun MainActivityScreen(
 
     // Подписываемся на события snackbar из модельки
     LaunchedEffect(Unit) {
-        viewModel.snackbarEvent.collect { message ->
-            snackbarHostState.showSnackbar(message)
+        viewModel.snackbarEvent.collect { event ->
+            when (event) {
+                is AppListEvent.SnackbarShown -> {
+                    snackbarHostState.showSnackbar(event.message)
+                }
+            }
         }
     }
 
     when (val currentState = state) {
-        is MainActivityState.Content -> {
-            ShowApplicationsList(
+        is AppListState.Content -> {
+            ApplicationsList(
                 onAppClicked = onAppClicked,
+                onIconClick = { viewModel.onIconClick() },
                 applications = currentState.applicationsData,
-                viewModel = viewModel,
                 snackbarHostState = snackbarHostState
             )
         }
 
-        MainActivityState.Error -> {
-            ShowError()
+        AppListState.Error -> {
+            Error()
         }
 
-        MainActivityState.Loading -> {
-            ShowLoader()
+        AppListState.Loading -> {
+            Loader()
         }
     }
 }
 
 @Composable
-private fun ShowApplicationsList(
+private fun ApplicationsList(
     onAppClicked: (String) -> Unit,
+    onIconClick: () -> Unit,
     applications: List<ApplicationData>,
-    viewModel: MainActivityViewModel,
     snackbarHostState: SnackbarHostState
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
@@ -79,9 +85,7 @@ private fun ShowApplicationsList(
 
             ApplicationsListView(
                 applications = applications,
-                onIconClick = { applicationId ->
-                    viewModel.onIconClick(applicationId)
-                },
+                onIconClick = { _ -> onIconClick() },
                 onCardClick = onAppClicked
             )
         }
@@ -91,7 +95,7 @@ private fun ShowApplicationsList(
 }
 
 @Composable
-private fun ShowLoader() {
+private fun Loader() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -103,7 +107,7 @@ private fun ShowLoader() {
 }
 
 @Composable
-private fun ShowError() {
+private fun Error() {
     Box(
         modifier = Modifier
             .fillMaxSize()

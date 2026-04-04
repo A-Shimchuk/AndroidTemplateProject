@@ -22,7 +22,7 @@ import com.example.androidtemplateproject.baseUIComponents.RowText
 import com.example.androidtemplateproject.baseUIComponents.TextSpacer
 import com.example.androidtemplateproject.screens.detailScreen.presentation.DetailScreenState
 import com.example.androidtemplateproject.screens.detailScreen.presentation.DetailScreenViewModel
-import com.example.androidtemplateproject.screens.mainActivity.theme.MainColor
+import com.example.androidtemplateproject.screens.appList.theme.MainColor
 
 @Composable
 internal fun DetailScreen() {
@@ -34,10 +34,10 @@ internal fun DetailScreen() {
             AppDetailsContent(currentState.applicationData)
         }
         DetailScreenState.Error -> {
-            ShowError()
+            Error()
         }
         DetailScreenState.Loading -> {
-            ShowLoader()
+            Loader()
         }
     }
 }
@@ -80,7 +80,7 @@ private fun AppDetailsContent(appDetails: ApplicationData) {
 }
 
 @Composable
-private fun ShowLoader() {
+private fun Loader() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -92,7 +92,7 @@ private fun ShowLoader() {
 }
 
 @Composable
-private fun ShowError() {
+private fun Error() {
     Box(
         modifier = Modifier
             .fillMaxSize()

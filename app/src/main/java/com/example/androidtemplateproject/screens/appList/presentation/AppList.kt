@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.screens.mainActivity.presentation
+package com.example.androidtemplateproject.screens.appList.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,21 +15,18 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.DetailScreen
 import com.example.androidtemplateproject.screens.repositories.AppRepository
-import com.example.androidtemplateproject.screens.mainActivity.theme.AndroidTemplateProjectTheme
-import com.example.androidtemplateproject.screens.mainActivity.presentation.MainActivityScreen
+import com.example.androidtemplateproject.screens.appList.theme.AndroidTemplateProjectTheme
+import com.example.androidtemplateproject.screens.appList.presentation.AppListScreen
 
 sealed class Screen(val route: String) {
     data object Main : Screen("main")
     data object Detail : Screen("detail/{applicationId}") {
-        fun createRoute(applicationId: String) = "detail/$applicationId"
-    }
-
-    companion object {
         const val ARG_APPLICATION_ID = "applicationId"
+        fun createRoute(applicationId: String) = "detail/$applicationId"
     }
 }
 
-class MainActivity : ComponentActivity() {
+class AppList : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -45,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding()
                     ) {
                         composable(Screen.Main.route) {
-                            MainActivityScreen(
+                            AppListScreen(
                                 onAppClicked = { applicationId ->
                                     navController.navigate(Screen.Detail.createRoute(applicationId))
                                 }
@@ -54,7 +51,7 @@ class MainActivity : ComponentActivity() {
 
                         composable(
                             route = Screen.Detail.route,
-                            arguments = listOf(navArgument(Screen.ARG_APPLICATION_ID) {
+                            arguments = listOf(navArgument(Screen.Detail.ARG_APPLICATION_ID) {
                                 type = NavType.StringType
                             })
                         ) { backStackEntry ->
