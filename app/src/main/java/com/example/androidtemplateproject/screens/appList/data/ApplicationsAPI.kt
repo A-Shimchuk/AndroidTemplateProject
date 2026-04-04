@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.repositories
+package com.example.androidtemplateproject.screens.appList.data
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -16,115 +16,115 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ThumbUp
-import com.example.androidtemplateproject.models.AppicationData
+import com.example.androidtemplateproject.sharedDomainComponents.ApplicationDTO
+import kotlinx.coroutines.delay
 
-internal object Repository {
-    fun getApplicationById(id: String): AppicationData? {
-        return getApplications().find { it.id == id }
-    }
-    fun getApplications(): List<AppicationData> {
+class ApplicationsAPI {
+    suspend fun getApplications(): List<ApplicationDTO> {
+        delay(800)
+
         return listOf(
-            AppicationData(
+            ApplicationDTO(
                 id = "phone",
-                icon = Icons.Default.MailOutline,
+                image = Icons.Default.MailOutline,
                 title = "Телефон",
                 subtitle = "Звонки и контакты",
                 category = "Social"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "mail",
-                icon = Icons.Default.ThumbUp,
+                image = Icons.Default.ThumbUp,
                 title = "Почта",
                 subtitle = "Электронная почта",
                 category = "Social"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "messages",
-                icon = Icons.Default.Notifications,
+                image = Icons.Default.Notifications,
                 title = "Сообщения",
                 subtitle = "SMS и мессенджеры",
                 category = "Social"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "video",
-                icon = Icons.Default.Settings,
+                image = Icons.Default.Settings,
                 title = "Видео",
                 subtitle = "Видеоплеер",
                 category = "Media"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "gallery",
-                icon = Icons.Default.DateRange,
+                image = Icons.Default.DateRange,
                 title = "Галерея",
                 subtitle = "Фотографии и видео",
                 category = "Media"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "music",
-                icon = Icons.Default.AccountBox,
+                image = Icons.Default.AccountBox,
                 title = "Музыка",
                 subtitle = "Музыкальный плеер",
                 category = "Media"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "maps",
-                icon = Icons.Default.AccountCircle,
+                image = Icons.Default.AccountCircle,
                 title = "Карты",
                 subtitle = "Навигация и карты",
                 category = "Navigation"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "places",
-                icon = Icons.Default.Place,
+                image = Icons.Default.Place,
                 title = "Места",
                 subtitle = "Избранные места",
                 category = "Navigation"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "cloud",
-                icon = Icons.Default.AddCircle,
+                image = Icons.Default.AddCircle,
                 title = "Облако",
                 subtitle = "Облачное хранилище",
                 category = "Utilities"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "calculator",
-                icon = Icons.Default.Lock,
+                image = Icons.Default.Lock,
                 title = "Калькулятор",
                 subtitle = "Вычисления",
                 category = "Utilities"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "calendar",
-                icon = Icons.Default.Build,
+                image = Icons.Default.Build,
                 title = "Календарь",
                 subtitle = "Расписание событий",
                 category = "Productivity"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "notes",
-                icon = Icons.Default.Call,
+                image = Icons.Default.Call,
                 title = "Заметки",
                 subtitle = "Записи и заметки",
                 category = "Productivity"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "settings",
-                icon = Icons.Default.Check,
+                image = Icons.Default.Check,
                 title = "Настройки",
                 subtitle = "Системные настройки",
                 category = "System"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "security",
-                icon = Icons.Default.CheckCircle,
+                image = Icons.Default.CheckCircle,
                 title = "Безопасность",
                 subtitle = "Конфиденциальность",
                 category = "System"
             ),
-            AppicationData(
+            ApplicationDTO(
                 id = "about",
-                icon = Icons.Default.Delete,
+                image = Icons.Default.Delete,
                 title = "О приложении",
                 subtitle = "Информация",
                 category = "System"
@@ -132,4 +132,3 @@ internal object Repository {
         )
     }
 }
-

@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.presentation.uiComponents.applicationList
+package com.example.androidtemplateproject.sharedUIComponents
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

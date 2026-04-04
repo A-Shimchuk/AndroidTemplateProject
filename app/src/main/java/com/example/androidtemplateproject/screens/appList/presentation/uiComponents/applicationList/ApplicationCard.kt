@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.presentation.uiComponents.applicationList
+package com.example.androidtemplateproject.screens.appList.presentation.uiComponents.applicationList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,10 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.models.AppicationData
+import com.example.androidtemplateproject.sharedUIComponents.RowText
+import com.example.androidtemplateproject.sharedUIComponents.TextSpacer
+import com.example.androidtemplateproject.screens.appList.data.ApplicationData
 
 @Composable
-fun ApplicationCard(data: AppicationData, onApplicationClick: (String) -> Unit) {
+internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Unit, onCardClick: (String) -> Unit) {
     Row(
         modifier = Modifier
             .padding(horizontal = 6.dp)
@@ -29,13 +31,16 @@ fun ApplicationCard(data: AppicationData, onApplicationClick: (String) -> Unit) 
             .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(Color.White)
             .clickable {
-                onApplicationClick(data.id)
+                onCardClick(data.id)
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             modifier = Modifier
-                .size(80.dp),
+                .size(80.dp)
+                .clickable {
+                    onIconClick(data.id)
+                },
             imageVector = data.icon,
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null

@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.presentation.uiComponents.applicationList
+package com.example.androidtemplateproject.screens.appList.presentation.uiComponents.applicationList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -13,20 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.androidtemplateproject.repositories.Repository
+import com.example.androidtemplateproject.screens.appList.data.ApplicationData
 
 @Composable
-fun ApplicationsListView(
+internal fun ApplicationsListView(
     modifier: Modifier = Modifier,
-    onApplicationClick: (String) -> Unit
+    applications: List<ApplicationData>,
+    onIconClick: (String) -> Unit,
+    onCardClick: (String) -> Unit
 ) {
-    val cornerRadius = 20
-
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding()
-            .clip(RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp))
+            .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .background(Color.White)
     ) {
         LazyColumn(
@@ -34,13 +33,17 @@ fun ApplicationsListView(
                 .fillMaxSize()
                 .background(
                     color = Color.White,
-                    shape = RoundedCornerShape(topStart = cornerRadius.dp, topEnd = cornerRadius.dp)
+                    shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
                 )
         ) {
-            itemsIndexed(Repository.getApplications()) { index, application ->
-                ApplicationCard(data = application, onApplicationClick = onApplicationClick)
+            itemsIndexed(applications) { index, application ->
+                ApplicationCard(
+                    data = application,
+                    onIconClick = onIconClick,
+                    onCardClick = onCardClick
+                )
 
-                if (index < Repository.getApplications().size - 1) {
+                if (index < applications.size - 1) {
                     HorizontalDivider(
                         color = Color.LightGray,
                         thickness = 0.5.dp

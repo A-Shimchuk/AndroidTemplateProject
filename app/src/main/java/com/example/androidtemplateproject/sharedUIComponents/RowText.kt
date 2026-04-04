@@ -1,4 +1,4 @@
-package com.example.androidtemplateproject.presentation.uiComponents.applicationList
+package com.example.androidtemplateproject.sharedUIComponents
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
