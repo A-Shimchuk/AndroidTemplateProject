@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.androidtemplateproject.screens.appList.presentation.AppListScreen
 import com.example.androidtemplateproject.sharedUIComponents.theme.AndroidTemplateProjectTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 sealed class Screen(val route: String) {
     data object Main : Screen("main")
@@ -24,6 +25,7 @@ sealed class Screen(val route: String) {
     }
 }
 
+@AndroidEntryPoint
 class AppList : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 

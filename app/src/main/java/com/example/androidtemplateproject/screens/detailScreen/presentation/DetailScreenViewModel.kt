@@ -4,24 +4,21 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidtemplateproject.screens.detailScreen.domain.GetApplicationDetailsUseCase
-import com.example.androidtemplateproject.screens.appList.data.ApplicationMapper
-import com.example.androidtemplateproject.screens.appList.data.ApplicationsAPI
 import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
-import com.example.androidtemplateproject.screens.appList.data.AppRepositoryImpl
 import com.example.androidtemplateproject.Screen
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailScreenViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
-    private val useCase = GetApplicationDetailsUseCase(
-        repository = AppRepositoryImpl(
-            mapper = ApplicationMapper(),
-            api = ApplicationsAPI()
-        )
-    )
+@HiltViewModel
+class DetailScreenViewModel @Inject constructor(
+    private val useCase: GetApplicationDetailsUseCase,
+    savedStateHandle: SavedStateHandle
+): ViewModel() {
     private val _state = MutableStateFlow<DetailScreenState>(DetailScreenState.Loading)
     val state: StateFlow<DetailScreenState> = _state.asStateFlow()
 

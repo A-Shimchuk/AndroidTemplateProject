@@ -1,11 +1,12 @@
 package com.example.androidtemplateproject.screens.appList.domain
 
-class GetApplicationsUseCase(
+import javax.inject.Inject
+
+class GetApplicationsUseCase @Inject constructor(
     private val repository: AppRepository
 ) {
     // FIXME: - ЮЗКЕЙС для примера. Помним что проксирующий юзкейс == бесполезный юзкейс
     operator suspend fun invoke(): List<ApplicationData> {
-        // Здесь какая-то логика
         return repository.getApplications()
     }
 }
