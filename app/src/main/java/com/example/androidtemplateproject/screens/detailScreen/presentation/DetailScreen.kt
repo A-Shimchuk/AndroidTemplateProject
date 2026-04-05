@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 import com.example.androidtemplateproject.sharedUIComponents.RowText
 import com.example.androidtemplateproject.sharedUIComponents.TextSpacer
@@ -26,7 +26,7 @@ import com.example.androidtemplateproject.sharedUIComponents.theme.MainColor
 
 @Composable
 internal fun DetailScreen() {
-    val viewModel: DetailScreenViewModel = viewModel()
+    val viewModel: DetailScreenViewModel = hiltViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     when (val currentState = state) {

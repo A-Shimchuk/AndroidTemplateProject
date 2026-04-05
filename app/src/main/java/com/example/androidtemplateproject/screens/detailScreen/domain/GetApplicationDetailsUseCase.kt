@@ -2,8 +2,9 @@ package com.example.androidtemplateproject.screens.detailScreen.domain
 
 import com.example.androidtemplateproject.screens.appList.domain.AppRepository
 import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
+import javax.inject.Inject
 
-class GetApplicationDetailsUseCase(
+class GetApplicationDetailsUseCase @Inject constructor(
     private val repository: AppRepository
 ) {
     // FIXME: - ЮЗКЕЙС для примера. Помним что проксирующий юзкейс == бесполезный юзкейс

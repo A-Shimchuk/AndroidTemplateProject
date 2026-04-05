@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 import com.example.androidtemplateproject.screens.appList.presentation.uiComponents.applicationList.ApplicationsListView
 import com.example.androidtemplateproject.screens.appList.presentation.uiComponents.header.HeaderView
@@ -28,7 +28,7 @@ fun AppListScreen(
     onAppClicked: (String) -> Unit
 ) {
     // Благодаря viewModel - модель не пересоздается при пересоздании composable-функции
-    val viewModel = viewModel<AppListViewModel>()
+    val viewModel: AppListViewModel = hiltViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     // Управление Snackbar
