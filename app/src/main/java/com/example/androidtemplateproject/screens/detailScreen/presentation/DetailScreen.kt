@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil3.compose.AsyncImage
 import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 import com.example.androidtemplateproject.sharedUIComponents.RowText
 import com.example.androidtemplateproject.sharedUIComponents.TextSpacer
@@ -53,21 +53,20 @@ private fun AppDetailsContent(appDetails: ApplicationData) {
                 end = 16.dp
             )
     ) {
-        Icon(
-            imageVector = appDetails.icon,
-            tint = MaterialTheme.colorScheme.primary,
+        AsyncImage(
+            model = appDetails.iconUrl,
             contentDescription = null,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
         RowText(
-            text = appDetails.title,
+            text = appDetails.name,
             style = MaterialTheme.typography.headlineMedium
         )
         TextSpacer(height = 8)
 
         RowText(
-            text = appDetails.subtitle,
+            text = appDetails.description,
             style = MaterialTheme.typography.bodyLarge
         )
         TextSpacer(height = 8)

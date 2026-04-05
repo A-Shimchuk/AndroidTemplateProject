@@ -6,7 +6,6 @@ import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 import com.example.androidtemplateproject.screens.appList.domain.GetApplicationsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,15 +41,18 @@ class AppListViewModel @Inject constructor(
     private fun getApplications() {
         viewModelScope.launch {
             _state.value = AppListState.Loading
-            delay(timeMillis = DELAY_VALUE)
-
-            val applications: List<ApplicationData> = useCase()
-            _state.value = AppListState.Content(applications)
+            try {
+                val applications: List<ApplicationData> = useCase()
+                _state.value = AppListState.Content(applications)
+            } catch (e: Exception) {
+                _state.value = AppListState.Error
+                // Можно отправить событие snackbar с ошибкой
+                _snackbarEvent.send(AppListEvent.SnackbarShown("Ошибка загрузки: ${e.message}"))
+            }
         }
     }
 
     private companion object LocalConstants{
         private const val SNACKBAR_TEXT = "Произошел показ снекбара"
-        private const val DELAY_VALUE: Long = 300
     }
 }
