@@ -27,7 +27,6 @@ import com.example.androidtemplateproject.sharedUIComponents.theme.MainColor
 fun AppListScreen(
     onAppClicked: (String) -> Unit
 ) {
-    // Благодаря viewModel - модель не пересоздается при пересоздании composable-функции
     val viewModel: AppListViewModel = hiltViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
