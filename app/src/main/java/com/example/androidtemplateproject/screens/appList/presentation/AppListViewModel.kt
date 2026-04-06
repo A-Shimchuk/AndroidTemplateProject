@@ -46,7 +46,6 @@ class AppListViewModel @Inject constructor(
                 _state.value = AppListState.Content(applications)
             } catch (e: Exception) {
                 _state.value = AppListState.Error
-                // Можно отправить событие snackbar с ошибкой
                 _snackbarEvent.send(AppListEvent.SnackbarShown("Ошибка загрузки: ${e.message}"))
             }
         }
