@@ -1,10 +1,10 @@
-package com.example.androidtemplateproject.screens.appList.data.network
+package com.example.androidtemplateproject.screens.appList.data
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class NetworkApplicationDetailDTO(
+data class NetworkApplicationDTO(
     @Json(name = "id")
     val id: String,
 

@@ -2,8 +2,12 @@ package com.example.androidtemplateproject.di
 
 import com.example.androidtemplateproject.screens.appList.data.AppRepositoryImpl
 import com.example.androidtemplateproject.screens.appList.data.ApplicationMapper
-import com.example.androidtemplateproject.screens.appList.data.network.ApplicationsApiService
+import com.example.androidtemplateproject.screens.appList.data.ApplicationsApiService
 import com.example.androidtemplateproject.screens.appList.domain.AppRepository
+import com.example.androidtemplateproject.screens.detailScreen.data.DetailApplicationMapper
+import com.example.androidtemplateproject.screens.detailScreen.data.DetailRepositoryImpl
+import com.example.androidtemplateproject.screens.detailScreen.data.network.DetailApplicationsApiService
+import com.example.androidtemplateproject.screens.detailScreen.domain.DetailRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -24,10 +28,18 @@ abstract class AppModule {
     @Singleton
     abstract fun bindAppRepository(impl: AppRepositoryImpl): AppRepository
 
+    @Binds
+    @Singleton
+    abstract fun bindDetailRepository(impl: DetailRepositoryImpl): DetailRepository
+
     companion object {
         @Provides
         @Singleton
         fun provideApplicationMapper(): ApplicationMapper = ApplicationMapper()
+
+        @Provides
+        @Singleton
+        fun provideDetailApplicationMapper(): DetailApplicationMapper = DetailApplicationMapper()
 
         @Provides
         @Singleton
@@ -58,6 +70,12 @@ abstract class AppModule {
         @Singleton
         fun provideApplicationsApiService(retrofit: Retrofit): ApplicationsApiService {
             return retrofit.create(ApplicationsApiService::class.java)
+        }
+
+        @Provides
+        @Singleton
+        fun provideDetailApplicationsApiService(retrofit: Retrofit): DetailApplicationsApiService {
+            return retrofit.create(DetailApplicationsApiService::class.java)
         }
     }
 }
