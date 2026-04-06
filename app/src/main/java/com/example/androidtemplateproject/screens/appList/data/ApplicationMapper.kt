@@ -1,15 +1,14 @@
 package com.example.androidtemplateproject.screens.appList.data
 
-import com.example.androidtemplateproject.sharedDomainComponents.ApplicationDTO
 import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
 
 class ApplicationMapper {
-    fun toApplicationData(dto: ApplicationDTO): ApplicationData {
+    fun toApplicationData(dto: NetworkApplicationDTO): ApplicationData {
         return ApplicationData(
             id = dto.id,
-            icon = dto.image,
-            title = dto.title,
-            subtitle = dto.subtitle,
+            iconUrl = dto.iconUrl,
+            name = dto.name,
+            description = dto.description,
             category = dto.category
         )
     }

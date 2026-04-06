@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.example.androidtemplateproject.sharedUIComponents.RowText
 import com.example.androidtemplateproject.sharedUIComponents.TextSpacer
 import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
@@ -35,14 +35,13 @@ internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Uni
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
+        AsyncImage(
             modifier = Modifier
                 .size(80.dp)
                 .clickable {
                     onIconClick(data.id)
                 },
-            imageVector = data.icon,
-            tint = MaterialTheme.colorScheme.primary,
+            model = data.iconUrl,
             contentDescription = null
         )
 
@@ -52,10 +51,10 @@ internal fun ApplicationCard(data: ApplicationData, onIconClick: (String) -> Uni
                 .align(Alignment.CenterVertically)
         ) {
 
-            RowText(data.title, style = MaterialTheme.typography.titleMedium)
+            RowText(data.name, style = MaterialTheme.typography.titleMedium)
             TextSpacer(2)
 
-            RowText(data.subtitle, style = MaterialTheme.typography.bodyMedium)
+            RowText(data.description, style = MaterialTheme.typography.bodyMedium)
             TextSpacer(2)
 
             RowText(data.category, style = MaterialTheme.typography.bodySmall)
