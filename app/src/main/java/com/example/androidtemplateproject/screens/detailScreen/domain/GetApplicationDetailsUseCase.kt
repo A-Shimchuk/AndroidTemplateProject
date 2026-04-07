@@ -1,12 +1,20 @@
 package com.example.androidtemplateproject.screens.detailScreen.domain
 
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetApplicationDetailsUseCase @Inject constructor(
     private val repository: DetailRepository
 ) {
-    // FIXME: - ЮЗКЕЙС для примера. Помним что проксирующий юзкейс == бесполезный юзкейс
-    operator suspend fun invoke(id: String): AppDetails? {
+    suspend operator fun invoke(id: String): AppDetails? {
         return repository.getApplicationById(id)
+    }
+
+    fun observeAppDetails(id: String): Flow<AppDetails?> {
+        return repository.observeAppDetails(id)
+    }
+
+    suspend fun toggleWishlist(id: String) {
+        repository.toggleWishlist(id)
     }
 }
