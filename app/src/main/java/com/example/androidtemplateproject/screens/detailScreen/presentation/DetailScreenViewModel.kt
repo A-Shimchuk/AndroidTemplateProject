@@ -4,12 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidtemplateproject.screens.detailScreen.domain.GetApplicationDetailsUseCase
-import com.example.androidtemplateproject.screens.detailScreen.domain.AppDetails
 import com.example.androidtemplateproject.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,26 +21,34 @@ class DetailScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow<DetailScreenState>(DetailScreenState.Loading)
     val state: StateFlow<DetailScreenState> = _state.asStateFlow()
 
+    private val appId: String = checkNotNull(savedStateHandle[Screen.Detail.ARG_APPLICATION_ID])
+
     init {
-        val id: String = checkNotNull(savedStateHandle[Screen.Detail.ARG_APPLICATION_ID])
-        getAppById(id)
+        loadDataAndObserve()
     }
 
-    private fun getAppById(id: String) {
+    private fun loadDataAndObserve() {
         viewModelScope.launch {
             _state.value = DetailScreenState.Loading
-            try {
-                val appDetails: AppDetails? = useCase(id)
 
-                appDetails?.let {
-                    _state.value = DetailScreenState.Content(appDetails)
-                } ?: run {
-                    _state.value = DetailScreenState.Error
-                }
-            } catch (e: Exception) {
+            if (useCase(appId) == null) {
                 _state.value = DetailScreenState.Error
-                // Можно добавить логирование ошибки
+                return@launch
             }
+
+            useCase.observeAppDetails(appId)
+                .catch { _state.value = DetailScreenState.Error }
+                .collect { appDetails ->
+                    appDetails?.let {
+                        _state.value = DetailScreenState.Content(it)
+                    }
+                }
+        }
+    }
+
+    fun toggleWishlist() {
+        viewModelScope.launch {
+            useCase.toggleWishlist(appId)
         }
     }
 }

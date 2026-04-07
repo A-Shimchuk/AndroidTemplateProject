@@ -14,7 +14,8 @@ class DetailApplicationMapper {
             size = 0f,
             iconUrl = dto.iconUrl,
             screenshotUrlList = null,
-            description = dto.description
+            description = dto.description,
+            isInWishlist = false
         )
     }
 }
