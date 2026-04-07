@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
-import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
+import com.example.androidtemplateproject.screens.detailScreen.domain.AppDetails
 import com.example.androidtemplateproject.sharedUIComponents.RowText
 import com.example.androidtemplateproject.sharedUIComponents.TextSpacer
 import com.example.androidtemplateproject.screens.detailScreen.presentation.DetailScreenState
@@ -31,7 +31,7 @@ internal fun DetailScreen() {
 
     when (val currentState = state) {
         is DetailScreenState.Content -> {
-            AppDetailsContent(currentState.applicationData)
+            AppDetailsContent(currentState.appDetails)
         }
         DetailScreenState.Error -> {
             Error()
@@ -43,7 +43,7 @@ internal fun DetailScreen() {
 }
 
 @Composable
-private fun AppDetailsContent(appDetails: ApplicationData) {
+private fun AppDetailsContent(appDetails: AppDetails) {
     Column(
         modifier = Modifier
             .fillMaxSize()

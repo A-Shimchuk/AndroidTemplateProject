@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidtemplateproject.screens.detailScreen.domain.GetApplicationDetailsUseCase
-import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
+import com.example.androidtemplateproject.screens.detailScreen.domain.AppDetails
 import com.example.androidtemplateproject.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,10 +30,10 @@ class DetailScreenViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = DetailScreenState.Loading
             try {
-                val application: ApplicationData? = useCase(id)
+                val appDetails: AppDetails? = useCase(id)
 
-                application?.let {
-                    _state.value = DetailScreenState.Content(application)
+                appDetails?.let {
+                    _state.value = DetailScreenState.Content(appDetails)
                 } ?: run {
                     _state.value = DetailScreenState.Error
                 }

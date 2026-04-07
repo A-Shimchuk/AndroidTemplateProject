@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    val room_version = "2.8.4"
+
     implementation(libs.androidx.lifecycle.viewModel.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -62,6 +64,8 @@ dependencies {
     implementation(libs.coil.compose)
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.4.0")
     ksp("com.google.dagger:hilt-android-compiler:2.59.2")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:${room_version}")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
