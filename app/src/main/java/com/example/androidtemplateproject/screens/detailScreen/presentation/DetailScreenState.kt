@@ -1,10 +1,10 @@
 package com.example.androidtemplateproject.screens.detailScreen.presentation
 
-import com.example.androidtemplateproject.screens.appList.domain.ApplicationData
+import com.example.androidtemplateproject.screens.detailScreen.domain.AppDetails
 
 sealed interface DetailScreenState {
     data class Content(
-        val applicationData: ApplicationData
+        val appDetails: AppDetails
     ) : DetailScreenState
     data object Loading : DetailScreenState
     data object Error : DetailScreenState

@@ -6,8 +6,14 @@ import com.example.androidtemplateproject.screens.appList.data.ApplicationsApiSe
 import com.example.androidtemplateproject.screens.appList.domain.AppRepository
 import com.example.androidtemplateproject.screens.detailScreen.data.DetailApplicationMapper
 import com.example.androidtemplateproject.screens.detailScreen.data.DetailRepositoryImpl
+import com.example.androidtemplateproject.screens.detailScreen.data.local.AppDatabase
+import com.example.androidtemplateproject.screens.detailScreen.data.local.AppDetailsDao
+import com.example.androidtemplateproject.screens.detailScreen.data.local.AppDetailsEntityMapper
 import com.example.androidtemplateproject.screens.detailScreen.data.network.DetailApplicationsApiService
 import com.example.androidtemplateproject.screens.detailScreen.domain.DetailRepository
+import android.content.Context
+import androidx.room.Room
+import dagger.hilt.android.qualifiers.ApplicationContext
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -41,6 +47,25 @@ abstract class AppModule {
         @Singleton
         fun provideDetailApplicationMapper(): DetailApplicationMapper = DetailApplicationMapper()
 
+        @Provides
+        @Singleton
+        fun provideAppDetailsEntityMapper(): AppDetailsEntityMapper = AppDetailsEntityMapper()
+
+        @Provides
+        @Singleton
+        fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+            return Room.databaseBuilder(
+                context,
+                AppDatabase::class.java,
+                AppDatabase.DATABASE_NAME
+            ).build()
+        }
+
+        @Provides
+        @Singleton
+        fun provideAppDetailsDao(database: AppDatabase): AppDetailsDao {
+            return database.appDetailsDao()
+        }
         @Provides
         @Singleton
         fun provideOkHttpClient(): OkHttpClient {
